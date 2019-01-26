@@ -10,18 +10,14 @@ public class BeetleController : MonoBehaviour
 
 	private DungBall m_DungBall;
 
-	private float m_DeadZone = 0.7f;
 	private float m_Movespeed = 3;
 
 	private Camera m_Camera;
 
-	[SerializeField]
-	private Text m_DebugText;
-
 	private Vector3 m_StartEulerAngles;
 	private Vector3 m_StartGyroAttitudeToEuler;
 
-	private float m_OriginalRotation;
+	private float m_KeyboardAngle;
 
 	private bool m_Move;
 
@@ -36,39 +32,29 @@ public class BeetleController : MonoBehaviour
 	private void Update()
 	{
 		if (!m_Move)
-			return; 
+			return;
 
-		Vector3 deltaEulerAngles =  m_StartGyroAttitudeToEuler - Input.gyro.attitude.eulerAngles;
+		transform.position += Move(); 
+		transform.position = ClampEdge();
+	}
+
+	private Vector3 Move()
+	{
+		Vector3 deltaEulerAngles = m_StartGyroAttitudeToEuler - Input.gyro.attitude.eulerAngles;
 		deltaEulerAngles.x = 0.0f;
 		deltaEulerAngles.y = 0.0f;
 
 #if UNITY_EDITOR
-		m_OriginalRotation += Input.GetAxis("Horizontal");
-		deltaEulerAngles.z = m_OriginalRotation;
+		m_KeyboardAngle += Input.GetAxis("Horizontal");
+		deltaEulerAngles.z = m_KeyboardAngle;
 #endif
 		transform.eulerAngles = deltaEulerAngles;
 
-		Debug.DrawRay(transform.position, transform.up, Color.red); 
 
-		m_DebugText.text = transform.eulerAngles.ToString();
-
-		Vector3 newPosition = transform.position + ((m_Movespeed * transform.up) * Time.deltaTime);
-		transform.position = newPosition;
-
-
-		ClampEdge();
+		return transform.position + ((m_Movespeed * transform.up) * Time.deltaTime);
 	}
 
-	private Vector3 GetKeyboardInput()
-	{
-		return new Vector3(
-				Input.GetAxis("Horizontal"),
-				Input.GetAxis("Vertical"),
-				0.0f
-			);
-	}
-
-	private void ClampEdge()
+	private Vector3 ClampEdge()
 	{
 		Vector3 pos = transform.position;
 
@@ -83,7 +69,7 @@ public class BeetleController : MonoBehaviour
 		if (pos.y < minY) pos.y = minY;
 		if (pos.y > maxY) pos.y = maxY;
 
-		transform.position = pos;
+		return pos; 
 	}
 
 	public void Go()
