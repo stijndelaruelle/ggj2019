@@ -13,4 +13,23 @@ public class DungballData : ScriptableObject
         if (m_DungballData != null)
             m_DungballData.Add(pickupData);
     }
+
+    public PickupData GetPickupData(int pickupID)
+    {
+        if (m_DungballData == null)
+            return null;
+
+        if (pickupID < 0 || pickupID >= m_DungballData.Count)
+            return null;
+
+        return m_DungballData[pickupID];
+    }
+
+    public int PickupCount()
+    {
+        if (m_DungballData != null)
+            return m_DungballData.Count;
+
+        return 0;
+    }
 }

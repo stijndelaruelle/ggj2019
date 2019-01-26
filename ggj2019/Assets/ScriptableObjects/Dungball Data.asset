@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5e76fc7ada5084291b04afa2bbaa1b, type: 3}
+  m_Name: Dungball Data
+  m_EditorClassIdentifier: 
+  m_DungballData:
+  - {fileID: 11400000, guid: dbfe961aebffef74fad3bd99ca9c0d89, type: 2}
+  - {fileID: 11400000, guid: dbfe961aebffef74fad3bd99ca9c0d89, type: 2}
+  - {fileID: 11400000, guid: 35515fe54e4f34f4184e6f9f566c540b, type: 2}
+  - {fileID: 11400000, guid: 4b63bb38e8b04764cb18ddb7d4db8250, type: 2}
+  - {fileID: 11400000, guid: 35515fe54e4f34f4184e6f9f566c540b, type: 2}
+  - {fileID: 11400000, guid: 35515fe54e4f34f4184e6f9f566c540b, type: 2}
