@@ -51,7 +51,7 @@ public class BeetleController : MonoBehaviour
 		transform.eulerAngles = deltaEulerAngles;
 
 
-		return transform.position + ((m_Movespeed * transform.up) * Time.deltaTime);
+		return (m_Movespeed * transform.up) * Time.deltaTime;
 	}
 
 	private Vector3 ClampEdge()
