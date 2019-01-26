@@ -3,7 +3,7 @@ using Sjabloon;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerWorm : MonoBehaviour, IGrowable
+public class PlayerController : MonoBehaviour, IGrowable
 {
     [SerializeField]
     private float m_MoveSpeed;
