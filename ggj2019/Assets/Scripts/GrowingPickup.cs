@@ -6,13 +6,23 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class GrowingPickup : MonoBehaviour
 {
+	public delegate void PickupDelegate(GrowingPickup pickup); 
+
     [SerializeField]
     private PickupData m_PickupData;
 
     [SerializeField]
     private SpriteRenderer m_SpriteRenderer;
 
-	private Collider2D m_Collider; 
+	private Collider2D m_Collider;
+
+	public event PickupDelegate PickupEvent; 
+
+	public PickupData PickupData
+	{
+		get { return m_PickupData; }
+		set { m_PickupData = value; }
+	}
 
 	private void Start()
 	{
@@ -45,9 +55,18 @@ public class GrowingPickup : MonoBehaviour
             //Check if we should get picked up!
             if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
             {
+				if (PickupEvent != null)
+					PickupEvent(this); 
+
                 growable.Grow(m_PickupData.GrowAmount);
                 gameObject.SetActive(false);
             }
         }
     }
+
+	public void SetSprite(Sprite sprite)
+	{
+		if (m_SpriteRenderer != null)
+			m_SpriteRenderer.sprite = sprite; 
+	}
 }

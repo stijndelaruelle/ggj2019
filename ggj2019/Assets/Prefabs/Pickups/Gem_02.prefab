@@ -119,5 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DungballData: {fileID: 11400000, guid: 1d1acf2d19b13104b92f59f0718509a8, type: 2}
   m_PickupData: {fileID: 11400000, guid: 4b63bb38e8b04764cb18ddb7d4db8250, type: 2}
   m_SpriteRenderer: {fileID: 0}

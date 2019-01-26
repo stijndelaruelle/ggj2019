@@ -11,10 +11,16 @@ public class PickupManager : MonoBehaviour
 	private Transform m_LocationContainer;
 
 	[SerializeField]
-	private Transform m_PickupContainer; 
+	private Transform m_PickupContainer;
 
 	[SerializeField]
-	private GrowingPickup[] m_PickupPrefabs;
+	private GrowingPickup m_PickupPrefab;
+
+	[SerializeField]
+	private PickupData[] m_PickupVarieties;
+
+	[SerializeField]
+	private DungballData m_DungballData; 
 
 	private List<Transform> m_SpawnLocations;
 
@@ -23,8 +29,6 @@ public class PickupManager : MonoBehaviour
 	private void Start()
 	{
 		m_Pickups = new List<GrowingPickup>(); 
-
-		m_PlayerController.GrowEvent += OnPlayerGrowth; 
 
 		GetLocations();
 		SpawnPickups(); 
@@ -47,18 +51,20 @@ public class PickupManager : MonoBehaviour
 	{
 		foreach (Transform location in m_SpawnLocations)
 		{
-			int rnd = Random.Range(0, m_PickupPrefabs.Length - 1); 
+			int rnd = Random.Range(0, m_PickupVarieties.Length); 
 
-			GrowingPickup pickup = Instantiate(m_PickupPrefabs[rnd], location.position, Quaternion.identity, m_PickupContainer);
-			//pickup.OnPlayerGrowth(m_PlayerController.Size); 
+			GrowingPickup pickup = Instantiate(m_PickupPrefab, location.position, Quaternion.identity, m_PickupContainer);
+			pickup.PickupData = m_PickupVarieties[rnd];
+			pickup.SetSprite(m_PickupVarieties[rnd].OutdoorSprite);
+			pickup.PickupEvent += OnPickup; 
 
 			m_Pickups.Add(pickup); 
 		}
 	}
 
-	private void OnPlayerGrowth(float newSize)
+	private void OnPickup(GrowingPickup pickup)
 	{
-		//foreach (GrowingPickup pickup in m_Pickups)
-		//	pickup.OnPlayerGrowth(newSize); 
+		pickup.PickupEvent -= OnPickup; 
+		m_DungballData.AddPickup(pickup.PickupData); 
 	}
 }

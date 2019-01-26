@@ -120,4 +120,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PickupData: {fileID: 11400000, guid: dbfe961aebffef74fad3bd99ca9c0d89, type: 2}
-  m_SpriteRenderer: {fileID: 0}
+  m_SpriteRenderer: {fileID: 8184499352490146008}
