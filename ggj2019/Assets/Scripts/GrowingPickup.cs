@@ -7,6 +7,7 @@ public class GrowingPickup : MonoBehaviour
     [SerializeField]
     private float m_GrowAmount;
 
+
     private void Start()
     {
         LevelDirector.Instance.LevelStartEvent += OnLevelStart;

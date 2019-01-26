@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IGrowable
 {
+    public delegate void MoveDelegate(PlayerController player, Vector3 newPosition);
+
     [SerializeField]
     private float m_MoveSpeed;
 
@@ -18,6 +20,10 @@ public class PlayerController : MonoBehaviour, IGrowable
 
     [SerializeField]
     private CircleCollider2D m_Collider;
+    public float ColliderRadius
+    {
+        get { return m_Collider.radius; }
+    }
 
     [Space(5)]
     [Header("Visuals")]
@@ -33,13 +39,33 @@ public class PlayerController : MonoBehaviour, IGrowable
     private float m_StartSize;
     private float m_StartRadius;
 
+    private float m_CurrentSize;
+    public float Size
+    {
+        get { return m_CurrentSize; }
+    }
+
+    private Vector3 m_CurrentDirection;
+    public Vector3 Direction
+    {
+        get { return m_CurrentDirection; }
+    }
+
+    //Events
+    public event MoveDelegate MoveEvent;
+
+
+    //Methods
     private void Start()
     {
         //Level reset
         m_StartPosition = transform.position.Copy();
+        m_StartSize = 1.0f;
 
         if (m_VisualTransform != null)
             m_StartSize = m_VisualTransform.localScale.x;
+
+        m_CurrentSize = m_StartSize;
 
         if (m_Collider != null)
             m_StartRadius = m_Collider.radius;
@@ -94,7 +120,7 @@ public class PlayerController : MonoBehaviour, IGrowable
         //Debug Utility
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Grow(0.1f);
+            Grow(0.5f);
         }
     }
 
@@ -127,7 +153,12 @@ public class PlayerController : MonoBehaviour, IGrowable
         if (m_DecalPool != null && offset.sqrMagnitude > 0.0f)
             m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
 
+        m_CurrentDirection = offset.normalized;
         transform.Translate(offset);
+
+        //Let the world know!
+        if (MoveEvent != null)
+            MoveEvent(this, transform.position);
     }
 
     private void GyroMove()
@@ -144,32 +175,42 @@ public class PlayerController : MonoBehaviour, IGrowable
         #endif
 
         Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
-        Vector3 normalizedDir = dir.normalized;
+        m_CurrentDirection = dir.normalized;
 
-        Vector3 offset = m_MoveSpeed * normalizedDir * Time.deltaTime;
+        Vector3 offset = m_MoveSpeed * m_CurrentDirection * Time.deltaTime;
 
         //Place decals along this axis
         if (m_DecalPool != null && dir.sqrMagnitude > 0.0f)
             m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
 
         transform.Translate(offset);
-    }
 
+        //Let the world know!
+        if (MoveEvent != null)
+            MoveEvent(this, transform.position);
+    }
 
     public void Grow(float amount)
     {
-        SetSize(m_VisualTransform.localScale.x + amount);
+        SetSize(m_CurrentSize + amount);
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
     }
 
     private void SetSize(float size)
     {
+        m_CurrentSize = size;
+
         //Gameplay adjusts immediatly
         if (m_Collider != null)
-            m_Collider.radius = size;
+            m_Collider.radius = m_StartRadius * m_CurrentSize;
 
         //Visuals can take their time
         if (m_VisualTransform != null)
-            m_VisualTransform.DOScale(size, 0.25f).SetEase(Ease.OutElastic);
+            m_VisualTransform.DOScale(m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
     }
 
 
