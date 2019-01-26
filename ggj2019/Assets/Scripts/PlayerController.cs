@@ -229,8 +229,8 @@ public class PlayerController : MonoBehaviour, IGrowable
 	//Accessors
 	public float GetPower()
 	{
-		return (m_CurrentMoveSpeed * m_CurrentSize);
-	}
+		return (m_CurrentSize); //m_CurrentMoveSpeed * 
+    }
 
 	//Debug
 	private void OnGUI()
