@@ -91,7 +91,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 727fdcc8f1f00fc45beaa62996afa200, type: 2}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.077694654, y: -0.7526778}
@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.2
-  m_PickupSize: 0.6
+  m_PickupData: {fileID: 11400000, guid: dbfe961aebffef74fad3bd99ca9c0d89, type: 2}
+  m_SpriteRenderer: {fileID: 0}

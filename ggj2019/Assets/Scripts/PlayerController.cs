@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IGrowable
 {
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition);
-	public delegate void GrowDelegate(float newSize);
 
 	[SerializeField]
 	private float m_StartMoveSpeed;
@@ -114,8 +113,9 @@ public class PlayerController : MonoBehaviour, IGrowable
 		m_StartGyroAttitudeToEuler = Input.gyro.attitude.eulerAngles;
 		m_DebugGyroAngle = 0.0f;
 
-		transform.position = m_StartPosition;
-		SetSize(m_StartSize);
+        transform.position = m_StartPosition;
+        m_CurrentMoveSpeed = m_StartMoveSpeed;
+        SetSize(m_StartSize);
 	}
 
 	private void OnLevelUpdate()
@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	public void Grow(float amount)
 	{
+        m_CurrentMoveSpeed += (amount * 10.0f); //Cheese!
 		SetSize(m_CurrentSize + amount);
 	}
 
@@ -213,9 +214,6 @@ public class PlayerController : MonoBehaviour, IGrowable
 	{
 		m_CurrentSize = size;
 
-		if (GrowEvent != null)
-			GrowEvent(m_CurrentSize);
-
 		//Gameplay adjusts immediatly
 		if (m_Collider != null)
 			m_Collider.radius = m_StartRadius * m_CurrentSize;
@@ -223,7 +221,10 @@ public class PlayerController : MonoBehaviour, IGrowable
 		//Visuals can take their time
 		if (m_VisualTransform != null)
 			m_VisualTransform.DOScale(m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
-	}
+
+        if (GrowEvent != null)
+            GrowEvent(m_CurrentSize);
+    }
 
 	//Accessors
 	public float GetPower()

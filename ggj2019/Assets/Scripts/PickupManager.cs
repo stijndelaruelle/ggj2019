@@ -50,7 +50,7 @@ public class PickupManager : MonoBehaviour
 			int rnd = Random.Range(0, m_PickupPrefabs.Length - 1); 
 
 			GrowingPickup pickup = Instantiate(m_PickupPrefabs[rnd], location.position, Quaternion.identity, m_PickupContainer);
-			pickup.OnPlayerGrowth(m_PlayerController.Size); 
+			//pickup.OnPlayerGrowth(m_PlayerController.Size); 
 
 			m_Pickups.Add(pickup); 
 		}
@@ -58,7 +58,7 @@ public class PickupManager : MonoBehaviour
 
 	private void OnPlayerGrowth(float newSize)
 	{
-		foreach (GrowingPickup pickup in m_Pickups)
-			pickup.OnPlayerGrowth(newSize); 
+		//foreach (GrowingPickup pickup in m_Pickups)
+		//	pickup.OnPlayerGrowth(newSize); 
 	}
 }

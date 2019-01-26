@@ -607,8 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.1
-  m_PickupSize: 0
+  m_PickupData: {fileID: 0}
+  m_SpriteRenderer: {fileID: 0}
 --- !u!4 &714685012
 Transform:
   m_ObjectHideFlags: 0
@@ -763,7 +763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &923107563
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1035,7 +1035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1069709539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1222,8 +1222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.1
-  m_PickupSize: 0
+  m_PickupData: {fileID: 0}
+  m_SpriteRenderer: {fileID: 0}
 --- !u!4 &1140421156
 Transform:
   m_ObjectHideFlags: 0
@@ -1427,8 +1427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.1
-  m_PickupSize: 0
+  m_PickupData: {fileID: 0}
+  m_SpriteRenderer: {fileID: 0}
 --- !u!58 &1662351449
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1690,8 +1690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2aa412a2de00c44b3e28776bd616ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.1
-  m_PickupSize: 0
+  m_PickupData: {fileID: 0}
+  m_SpriteRenderer: {fileID: 0}
 --- !u!4 &1754707142
 Transform:
   m_ObjectHideFlags: 0
