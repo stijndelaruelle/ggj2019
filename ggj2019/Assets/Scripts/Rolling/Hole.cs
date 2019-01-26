@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
@@ -19,7 +17,8 @@ public class Hole : MonoBehaviour
 
 		if (player.Size <= m_WarningSize)
 			Debug.Log("Your ball is too small!");
-		else if (player.Size >= m_MaxSize)
+
+		if (player.Size >= m_MaxSize)
 			Debug.Log("You ball is too large!");
 		else LevelDirector.Instance.StopLevel(); 
 	}

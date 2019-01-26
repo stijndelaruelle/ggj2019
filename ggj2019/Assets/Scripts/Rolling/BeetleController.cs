@@ -9,7 +9,10 @@ public class BeetleController : MonoBehaviour
 	private PlayerController m_DungBall;
 
 	[SerializeField]
-	private CircleCollider2D m_Collider; 
+	private CircleCollider2D m_Collider;
+
+	[SerializeField]
+	private Animator m_Animator; 
 
 	private bool m_Follow;
 
@@ -52,10 +55,12 @@ public class BeetleController : MonoBehaviour
 	private void OnLevelStart()
 	{
 		m_Follow = true;
+		m_Animator.SetBool("moving", m_Follow); 
 	}
 
 	private void OnLevelStop()
 	{
 		m_Follow = false;
+		m_Animator.SetBool("moving", m_Follow); 
 	}
 }
