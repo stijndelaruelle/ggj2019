@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
-public class DungBallController : MonoBehaviour
+public class DungBallController : MonoBehaviour, IGrowable
 {
+	[SerializeField]
+	private Transform m_VisualTransform;
+
+	private CircleCollider2D m_Collider; 
+
 	private Vector3 m_StartEulerAngles;
 	private Vector3 m_StartGyroAttitudeToEuler;
 
 	private Camera m_Camera;
 
+	[SerializeField]
 	private float m_Movespeed = 3;
 	private float m_KeyboardAngle;
-	private float m_Radius = 0.5f; 
 
 	private bool m_Move;
 
 	private void Start()
 	{
+		m_Collider = GetComponent<CircleCollider2D>(); 
 		m_Camera = Camera.main;
 
 		Input.gyro.enabled = true;
@@ -22,6 +29,11 @@ public class DungBallController : MonoBehaviour
 
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			Grow(0.1f);
+		}
+
 		if (!m_Move)
 			return;
 
@@ -70,8 +82,17 @@ public class DungBallController : MonoBehaviour
 		m_Move = true;
 	}
 
+	public void Grow(float amount)
+	{
+		if (m_Collider != null)
+			m_Collider.radius += amount;
+
+		if (m_VisualTransform != null)
+			m_VisualTransform.DOScale(m_VisualTransform.localScale.x + amount, 0.25f).SetEase(Ease.OutElastic); 
+	}
+
 	public float Radius
 	{
-		get { return m_Radius; }
+		get { return m_Collider != null ? m_Collider.radius : 0.0f; }
 	}
 }

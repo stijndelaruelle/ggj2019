@@ -10,6 +10,12 @@ public class BeetleController : MonoBehaviour
 
 	private void Update()
 	{
-		transform.position = m_DungBall.transform.position + (-m_DungBall.transform.up * m_DungBall.Radius); 
+		Vector3 diff = m_DungBall.transform.position - transform.position;
+		diff.Normalize();
+
+		float rotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0f, 0f, rotationZ - 90);
+
+		transform.position = m_DungBall.transform.position + (-m_DungBall.transform.up * (m_DungBall.Radius * 2)); 
 	}
 }
