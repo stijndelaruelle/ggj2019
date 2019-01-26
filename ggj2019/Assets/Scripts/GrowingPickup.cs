@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class GrowingPickup : MonoBehaviour
 {
 	[SerializeField]
@@ -18,8 +19,8 @@ public class GrowingPickup : MonoBehaviour
 
 		m_Collider = GetComponent<Collider2D>(); 
 
-		if (m_Collider != null)
-			m_Collider.isTrigger = false; 
+		//if (m_Collider != null)
+		//	m_Collider.isTrigger = false; 
 	}
 
 	private void OnDestroy()

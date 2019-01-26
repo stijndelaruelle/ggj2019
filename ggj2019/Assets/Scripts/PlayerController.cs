@@ -173,13 +173,18 @@ public class PlayerController : MonoBehaviour, IGrowable
 		deltaEulerAngles.x = 0.0f;
 		deltaEulerAngles.y = 0.0f;
 
-#if UNITY_STANDALONE || UNITY_EDITOR
-		m_DebugGyroAngle += InputManager.Instance.GetAxis("PlayerWorm_Vertical") * m_DebugRotateSpeed;
-		deltaEulerAngles.z = m_DebugGyroAngle;
-#endif
+        #if UNITY_STANDALONE || UNITY_EDITOR
+		    m_DebugGyroAngle += InputManager.Instance.GetAxis("PlayerWorm_Vertical") * m_DebugRotateSpeed;
+		    deltaEulerAngles.z = m_DebugGyroAngle;
+        #endif
 
 		Vector3 dir = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
-		m_CurrentDirection = dir.normalized;
+
+        #if UNITY_STANDALONE || UNITY_EDITOR
+            dir.x *= -1;
+        #endif
+
+        m_CurrentDirection = dir.normalized;
 
 		Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
 
