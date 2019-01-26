@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c8c42e4ccc788498317c0d2a62d433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 10
+  m_StartMoveSpeed: 10
   m_DebugRotateSpeed: 2
   m_VisualTransform: {fileID: 412408037}
   m_Collider: {fileID: 275539940}

@@ -69,36 +69,29 @@ public class GrowLevelBorder : MonoBehaviour
 
     private void OnPlayerMove(PlayerController player, Vector3 newPosition)
     {
-        bool isAllowedToPass = false;
+        if (IsBroken())
+            return;
 
         Vector3 diff = newPosition - transform.position;
-        Vector3 direction = diff.normalized;
 
         //Check if a player is trying to leave the level
-        if (diff.magnitude >= (m_Radius - player.ColliderSize))
+        if (diff.magnitude >= m_Radius)
         {
-            //Check if the player is within the wall range
-            float dot = Vector3.Dot(direction, new Vector3(0.0f, 1.0f, 0.0f));
-            if (dot < 0.15f && dot > -0.15f) //Super dirty & hardcoded way to limit the wall breaking & passing range
+            //Check if the power of the player is enough to break trough the next stage (and if there is a next stage)
+            if (m_CurrentBreakSetting >= 0 && (m_CurrentBreakSetting + 1) < m_BreakSettings.Count)
             {
-                //Check if the power of the player is enough to break trough the next stage (and if there is a next stage)
-                if (m_CurrentBreakSetting >= 0 && (m_CurrentBreakSetting + 1) < m_BreakSettings.Count)
+                if (player.GetPower() >= m_BreakSettings[m_CurrentBreakSetting].RequiredPower)
                 {
-                    if (player.GetPower() >= m_BreakSettings[m_CurrentBreakSetting].RequiredPower)
-                    {
-                        m_CurrentBreakSetting += 1;
-                        m_Visuals.color = m_BreakSettings[m_CurrentBreakSetting].VisualColor;
-                    }
+                    m_CurrentBreakSetting += 1;
+                    m_Visuals.color = m_BreakSettings[m_CurrentBreakSetting].VisualColor;
                 }
-
-                if (IsBroken())
-                    isAllowedToPass = true;
             }
 
             //Bounce the player back unless the border just got broken.
-            if (isAllowedToPass == false)
+            if (IsBroken() == false)
             {
-                player.SetPosition(direction * (m_Radius - player.ColliderSize));
+                Vector3 direction = diff.normalized;
+                player.SetPosition(direction * m_Radius);
             }
         }
     }

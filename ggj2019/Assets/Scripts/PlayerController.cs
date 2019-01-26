@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour, IGrowable
 		m_DebugGyroAngle = 0.0f;
 
 		transform.position = m_StartPosition;
-		m_CurrentMoveSpeed = m_StartMoveSpeed;
 		SetSize(m_StartSize);
 	}
 
@@ -180,11 +179,6 @@ public class PlayerController : MonoBehaviour, IGrowable
 #endif
 
 		Vector3 dir = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
-
-#if UNITY_STANDALONE || UNITY_EDITOR
-		dir.x *= -1;
-#endif
-
 		m_CurrentDirection = dir.normalized;
 
 		Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
@@ -202,7 +196,6 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	public void Grow(float amount)
 	{
-		m_CurrentMoveSpeed += (amount * 10.0f);
 		SetSize(m_CurrentSize + amount);
 	}
 
@@ -230,7 +223,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 	//Accessors
 	public float GetPower()
 	{
-		return (m_CurrentMoveSpeed);// * m_CurrentSize);
+		return (m_CurrentMoveSpeed * m_CurrentSize);
 	}
 
 	//Debug
