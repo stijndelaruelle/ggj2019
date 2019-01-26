@@ -20,6 +20,7 @@ public class PickupData : ScriptableObject
     {
         get { return m_PickupSize; }
     }
+
     [SerializeField]
     private bool m_IsBadIndoors;
     public bool IsBadIndoors

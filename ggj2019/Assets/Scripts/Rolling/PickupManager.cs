@@ -14,10 +14,7 @@ public class PickupManager : MonoBehaviour
 	private Transform m_PickupContainer;
 
 	[SerializeField]
-	private GrowingPickup m_PickupPrefab;
-
-	[SerializeField]
-	private PickupData[] m_PickupVarieties;
+	private GrowingPickup[] m_PickupPrefabs; 
 
 	[SerializeField]
 	private DungballData m_DungballData; 
@@ -51,11 +48,9 @@ public class PickupManager : MonoBehaviour
 	{
 		foreach (Transform location in m_SpawnLocations)
 		{
-			int rnd = Random.Range(0, m_PickupVarieties.Length); 
+			int rnd = Random.Range(0, m_PickupPrefabs.Length); 
 
-			GrowingPickup pickup = Instantiate(m_PickupPrefab, location.position, Quaternion.identity, m_PickupContainer);
-			pickup.PickupData = m_PickupVarieties[rnd];
-			pickup.SetSprite(m_PickupVarieties[rnd].OutdoorSprite);
+			GrowingPickup pickup = Instantiate(m_PickupPrefabs[rnd], location.position, Quaternion.identity, m_PickupContainer);
 			pickup.PickupEvent += OnPickup; 
 
 			m_Pickups.Add(pickup); 
