@@ -1,26 +1,23 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class GrowingPickup : MonoBehaviour
 {
-	[SerializeField]
-	private float m_GrowAmount;
+    [SerializeField]
+    private PickupData m_PickupData;
 
-	[SerializeField]
-	private float m_PickupSize;
+    [SerializeField]
+    private SpriteRenderer m_SpriteRenderer;
 
 	private Collider2D m_Collider; 
 
 	private void Start()
 	{
 		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
-
-		m_Collider = GetComponent<Collider2D>(); 
-
-		//if (m_Collider != null)
-		//	m_Collider.isTrigger = false; 
+		m_Collider = GetComponent<Collider2D>();
 	}
 
 	private void OnDestroy()
@@ -36,20 +33,21 @@ public class GrowingPickup : MonoBehaviour
 		gameObject.SetActive(true);
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		IGrowable growable = collision.GetComponent<IGrowable>();
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_PickupData == null)
+            return;
 
-		if (growable != null)
-		{
-			growable.Grow(m_GrowAmount);
-			gameObject.SetActive(false);
-		}
-	}
+        IGrowable growable = collision.collider.GetComponent<IGrowable>();
 
-	public void OnPlayerGrowth(float newSize)
-	{
-		if (newSize >= m_PickupSize && m_Collider != null)
-			m_Collider.isTrigger = true; 
-	}
+        if (growable != null)
+        {
+            //Check if we should get picked up!
+            if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
+            {
+                growable.Grow(m_PickupData.GrowAmount);
+                gameObject.SetActive(false);
+            }
+        }
+    }
 }
