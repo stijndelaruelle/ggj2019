@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BeetleController : MonoBehaviour
 {
 	[SerializeField]
-	private DungBallController m_DungBall;
+	private PlayerController m_DungBall;
 
 	private void Update()
 	{
