@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IGrowable
 {
-
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition);
-	public delegate void GrowDelegate(float newSize); 
+	public delegate void GrowDelegate(float newSize);
 
 	[SerializeField]
-	private float m_MoveSpeed;
+	private float m_StartMoveSpeed;
+	private Vector3 m_StartPosition;
+	private float m_StartSize;
+	private float m_StartRadius;
 
 	[SerializeField]
 	private float m_DebugRotateSpeed;
@@ -36,10 +38,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 	private Vector3 m_StartGyroAttitudeToEuler;
 	private float m_DebugGyroAngle;
 
-	//Level reset
-	private Vector3 m_StartPosition;
-	private float m_StartSize;
-	private float m_StartRadius;
+	private float m_CurrentMoveSpeed;
 
 	private float m_CurrentSize;
 	public float Size
@@ -55,8 +54,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	//Events
 	public event MoveDelegate MoveEvent;
-	public event GrowDelegate GrowEvent; 
-	
+	public event GrowDelegate GrowEvent;
 
 	//Methods
 	private void Start()
@@ -68,6 +66,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 		if (m_VisualTransform != null)
 			m_StartSize = m_VisualTransform.localScale.x;
 
+		m_CurrentMoveSpeed = m_StartMoveSpeed;
 		m_CurrentSize = m_StartSize;
 
 		if (m_Collider != null)
@@ -109,12 +108,14 @@ public class PlayerController : MonoBehaviour, IGrowable
 	}
 
 
+	//Events
 	private void OnLevelStart()
 	{
 		m_StartGyroAttitudeToEuler = Input.gyro.attitude.eulerAngles;
 		m_DebugGyroAngle = 0.0f;
 
 		transform.position = m_StartPosition;
+		m_CurrentMoveSpeed = m_StartMoveSpeed;
 		SetSize(m_StartSize);
 	}
 
@@ -144,13 +145,14 @@ public class PlayerController : MonoBehaviour, IGrowable
 	}
 
 
+	//Mutators
 	private void Move()
 	{
 		InputManager inputManager = InputManager.Instance;
 
 		Vector3 offset = Vector3.zero;
-		offset.x = inputManager.GetAxis("PlayerWorm_Vertical") * m_MoveSpeed * Time.deltaTime;
-		offset.y = inputManager.GetAxis("PlayerWorm_Horizontal") * m_MoveSpeed * Time.deltaTime;
+		offset.x = inputManager.GetAxis("PlayerWorm_Vertical") * m_CurrentMoveSpeed * Time.deltaTime;
+		offset.y = inputManager.GetAxis("PlayerWorm_Horizontal") * m_CurrentMoveSpeed * Time.deltaTime;
 
 		//Place decals along this axis
 		if (m_DecalPool != null && offset.sqrMagnitude > 0.0f)
@@ -177,10 +179,15 @@ public class PlayerController : MonoBehaviour, IGrowable
 		deltaEulerAngles.z = m_DebugGyroAngle;
 #endif
 
-		Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
+		Vector3 dir = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+		dir.x *= -1;
+#endif
+
 		m_CurrentDirection = dir.normalized;
 
-		Vector3 offset = m_MoveSpeed * m_CurrentDirection * Time.deltaTime;
+		Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
 
 		//Place decals along this axis
 		if (m_DecalPool != null && dir.sqrMagnitude > 0.0f)
@@ -195,6 +202,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	public void Grow(float amount)
 	{
+		m_CurrentMoveSpeed += (amount * 10.0f);
 		SetSize(m_CurrentSize + amount);
 	}
 
@@ -219,6 +227,11 @@ public class PlayerController : MonoBehaviour, IGrowable
 			m_VisualTransform.DOScale(m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
 	}
 
+	//Accessors
+	public float GetPower()
+	{
+		return (m_CurrentMoveSpeed);// * m_CurrentSize);
+	}
 
 	//Debug
 	private void OnGUI()

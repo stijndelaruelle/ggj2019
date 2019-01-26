@@ -4,11 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/GrowingScene.unity
-    guid: ee597bc27badcbe4ea11e00382f8a610
-  - enabled: 1
-    path: Assets/Scenes/RollingScene.unity
-    guid: 89c7476300f83b34eab5b6443aaee991
+  m_Scenes: []
   m_configObjects: {}
