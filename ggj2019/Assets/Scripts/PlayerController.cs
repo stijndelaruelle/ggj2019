@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour, IGrowable
             deltaEulerAngles.z = m_DebugGyroAngle;
         #endif
 
-        Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
+        Vector3 dir = new Vector3(-Mathf.Sin(Mathf.Deg2Rad * deltaEulerAngles.z), Mathf.Cos(Mathf.Deg2Rad * deltaEulerAngles.z), 0.0f);
         m_CurrentDirection = dir.normalized;
 
         Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
