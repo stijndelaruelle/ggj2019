@@ -56,4 +56,12 @@ public class LevelDirector : Singleton<LevelDirector>
 
         m_IsLevelStarted = false;
     }
+
+	public void CompleteLevel(bool succes)
+	{
+		if (LevelStopEvent != null)
+			LevelStopEvent();
+
+		m_IsLevelStarted = false; 
+	}
 }

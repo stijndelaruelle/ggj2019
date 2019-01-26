@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	[SerializeField]
 	private float m_StartMoveSpeed;
+	[SerializeField]
+	private float m_MinSize; 
 	private Vector3 m_StartPosition;
 	private float m_StartSize;
 	private float m_StartRadius;
@@ -222,8 +224,9 @@ public class PlayerController : MonoBehaviour, IGrowable
 		if (m_VisualTransform != null)
 			m_VisualTransform.DOScale(m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
 
-        if (GrowEvent != null)
-            GrowEvent(m_CurrentSize);
+		//Fail level when you lose your ball
+		if (m_CurrentSize < m_MinSize)
+			LevelDirector.Instance.CompleteLevel(false);  
     }
 
 	//Accessors
