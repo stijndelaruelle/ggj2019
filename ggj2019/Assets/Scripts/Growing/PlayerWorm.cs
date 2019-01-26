@@ -1,6 +1,5 @@
-﻿using Sjabloon;
-using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
+using Sjabloon;
 using UnityEngine;
 
 public class PlayerWorm : MonoBehaviour, IGrowable
@@ -71,6 +70,15 @@ public class PlayerWorm : MonoBehaviour, IGrowable
         transform.Translate(offset);
     }
 
+    private void Update()
+    {
+        //Debug Utility
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Grow(0.1f);
+        }
+    }
+
     public void Grow(float amount)
     {
         SetSize(m_VisualTransform.localScale.x + amount);
@@ -78,15 +86,13 @@ public class PlayerWorm : MonoBehaviour, IGrowable
 
     private void SetSize(float size)
     {
-        if (m_VisualTransform != null)
-        {
-            //m_VisualTransform.localScale = new Vector3(size, size, 0.0f);
-        }
-
+        //Gameplay adjusts immediatly
         if (m_Collider != null)
-        {
-            //m_Collider.radius = size;
-        }
+            m_Collider.radius = size;
+
+        //Visuals can take their time
+        if (m_VisualTransform != null)
+            m_VisualTransform.DOScale(size, 0.25f).SetEase(Ease.OutElastic);
     }
 
     private void OnLevelReset()
