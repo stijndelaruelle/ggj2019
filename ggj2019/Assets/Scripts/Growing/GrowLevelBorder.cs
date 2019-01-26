@@ -67,7 +67,7 @@ public class GrowLevelBorder : MonoBehaviour
         m_CurrentBreakSetting = 0;
     }
 
-    private void OnPlayerMove(PlayerController player, Vector3 newPosition)
+    private void OnPlayerMove(PlayerController player, Vector3 newPosition, Quaternion newRotation)
     {
         bool isAllowedToPass = false;
 

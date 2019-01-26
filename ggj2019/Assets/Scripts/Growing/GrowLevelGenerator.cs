@@ -4,7 +4,10 @@ using UnityEngine;
 public class GrowLevelGenerator : MonoBehaviour
 {
     [SerializeField]
-    private DungballData m_DungballData;
+    private DungballData m_RollingDungballData;
+
+    [SerializeField]
+    private DungballData m_FallBackDungballData;
 
     [SerializeField]
     private GrowingPickup m_PickupPrefab;
@@ -18,12 +21,27 @@ public class GrowLevelGenerator : MonoBehaviour
     [SerializeField]
     private bool m_AddRandomSpinToRings = true;
 
+
     private void Start()
     {
-        Generate();
+        DungballData dungballData = m_RollingDungballData;
+
+        if (dungballData == null)
+            dungballData = m_FallBackDungballData;
+
+        else if (dungballData.PickupCount() <= 0)
+            dungballData = m_FallBackDungballData;
+
+        if (dungballData == null)
+        {
+            Debug.LogWarning("Level cannot be generated, 'RollingDungballData' nor 'FallbackDungballData' found!");
+            return;
+        }
+
+        Generate(dungballData);
     }
 
-    private void Generate()
+    private void Generate(DungballData dungballData)
     {
         if (m_PickupsPerRing.Count <= 0)
         {
@@ -31,17 +49,17 @@ public class GrowLevelGenerator : MonoBehaviour
             return;
         }
 
-        if (m_DungballData == null)
+        if (dungballData == null)
         {
             Debug.LogError("Level can't be generated as there is no dungball data to be found");
             return;
         }
 
-        int numRings = GetNumberOfRings();
+        int numRings = GetNumberOfRings(dungballData);
         if (numRings <= 0)
             return;
 
-        int remainingPickups = m_DungballData.PickupCount();
+        int remainingPickups = dungballData.PickupCount();
         if (remainingPickups <= 0)
             return;
 
@@ -79,7 +97,8 @@ public class GrowLevelGenerator : MonoBehaviour
 
                 //Actually spawn the pickup
                 GrowingPickup newPickup = GameObject.Instantiate<GrowingPickup>(m_PickupPrefab, this.transform);
-                newPickup.PickupData = m_DungballData.GetPickupData(dungBallPickupID);
+                newPickup.PickupData = dungballData.GetPickupData(dungBallPickupID);
+                newPickup.SetIndoorSprite();
 
                 newPickup.transform.position = dir * (radiusOffsetPerRing * (ringID + 1));
                 dungBallPickupID += 1;
@@ -87,11 +106,11 @@ public class GrowLevelGenerator : MonoBehaviour
         }
     }
 
-    private int GetNumberOfRings()
+    private int GetNumberOfRings(DungballData dungballData)
     {
         //Decide how many rings we'll need
         int numRings = 0;
-        int remainingPickups = m_DungballData.PickupCount();
+        int remainingPickups = dungballData.PickupCount();
 
         if (remainingPickups <= 0)
             return 0;
@@ -112,9 +131,9 @@ public class GrowLevelGenerator : MonoBehaviour
         return numRings;
     }
 
-    private int PickupsOnRing(int ringID)
+    private int PickupsOnRing(DungballData dungballData, int ringID)
     {
-        int remainingPickups = m_DungballData.PickupCount();
+        int remainingPickups = dungballData.PickupCount();
 
         if (remainingPickups <= 0)
             return 0;

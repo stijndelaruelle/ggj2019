@@ -69,4 +69,16 @@ public class GrowingPickup : MonoBehaviour
 		if (m_SpriteRenderer != null)
 			m_SpriteRenderer.sprite = sprite; 
 	}
+
+    public void SetOutdoorSprite()
+    {
+        if (m_PickupData != null)
+            SetSprite(m_PickupData.OutdoorSprite);
+    }
+
+    public void SetIndoorSprite()
+    {
+        if (m_PickupData != null)
+            SetSprite(m_PickupData.IndoorSprite);
+    }
 }

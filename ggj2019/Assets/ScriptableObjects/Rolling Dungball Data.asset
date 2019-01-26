@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd5e76fc7ada5084291b04afa2bbaa1b, type: 3}
-  m_Name: RollingDungballData
+  m_Name: Rolling Dungball Data
   m_EditorClassIdentifier: 
   m_DungballData: []
