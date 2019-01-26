@@ -24,6 +24,7 @@ public class GrowingPickup : MonoBehaviour
 		set { m_PickupData = value; }
 	}
 
+
 	private void Start()
 	{
 		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
