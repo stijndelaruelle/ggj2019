@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 275539937}
   - component: {fileID: 275539938}
   m_Layer: 0
-  m_Name: Beetle
+  m_Name: DungBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,10 +219,9 @@ Transform:
   m_LocalPosition: {x: 0.13398467, y: -0.3377374, z: -0.043342475}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2096483002}
   - {fileID: 412408037}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -41.97}
 --- !u!114 &275539938
 MonoBehaviour:
@@ -233,11 +232,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 275539936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023e5e16f1a58f145820d35b8df41e73, type: 3}
+  m_Script: {fileID: 11500000, guid: ef845bb7e4a777147a7f3b22255d716c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Beetle: {fileID: 2096483002}
-  m_DebugText: {fileID: 105685140}
 --- !u!1 &412408036
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,9 +246,8 @@ GameObject:
   - component: {fileID: 412408037}
   - component: {fileID: 412408039}
   - component: {fileID: 412408038}
-  - component: {fileID: 412408040}
   m_Layer: 0
-  m_Name: BallGraphic
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +265,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 275539937}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &412408038
 CircleCollider2D:
@@ -335,18 +331,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &412408040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412408036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35844e3eb4a8439488641dcb3f8595a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &434605988
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +658,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1507277541
 MonoBehaviour:
@@ -688,6 +672,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f3fa610ffcda0c42ac5b22635a0faf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1785182477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1785182479}
+  - component: {fileID: 1785182478}
+  m_Layer: 0
+  m_Name: Beetle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1785182478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785182477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023e5e16f1a58f145820d35b8df41e73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DungBall: {fileID: 275539938}
+--- !u!4 &1785182479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785182477}
+  m_LocalRotation: {x: -0, y: -0, z: -0.35812485, w: 0.93367374}
+  m_LocalPosition: {x: 0.13398467, y: -0.3377374, z: -0.043342475}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children:
+  - {fileID: 2096483002}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1918408632
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +889,7 @@ RectTransform:
   - {fileID: 105685139}
   - {fileID: 762887274}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -878,7 +907,7 @@ GameObject:
   - component: {fileID: 2096483002}
   - component: {fileID: 2096483001}
   m_Layer: 0
-  m_Name: BeetleGraphic
+  m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -941,9 +970,9 @@ Transform:
   m_GameObject: {fileID: 2096482999}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 275539937}
+  m_Father: {fileID: 1785182479}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134269048
@@ -1010,5 +1039,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
