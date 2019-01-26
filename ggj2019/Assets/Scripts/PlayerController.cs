@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 
     [SerializeField]
     private CircleCollider2D m_Collider;
-    public float ColliderRadius
+    public float ColliderSize
     {
         get { return m_Collider.radius; }
     }
