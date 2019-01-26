@@ -9,10 +9,23 @@ public class GrowingPickup : MonoBehaviour
 
 	private void Start()
 	{
-		LevelDirector.Instance.LevelResetEvent += OnLevelReset;
+		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
 	}
 
-	public void OnTriggerEnter2D(Collider2D collision)
+	private void OnDestroy()
+	{
+		LevelDirector levelDirector = LevelDirector.Instance;
+
+		if (levelDirector != null)
+			levelDirector.LevelStartEvent -= OnLevelStart;
+	}
+
+	private void OnLevelStart()
+	{
+		gameObject.SetActive(true);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		IGrowable growable = collision.GetComponent<IGrowable>();
 
@@ -21,10 +34,5 @@ public class GrowingPickup : MonoBehaviour
 			growable.Grow(m_GrowAmount);
 			gameObject.SetActive(false);
 		}
-	}
-
-	private void OnLevelReset()
-	{
-		gameObject.SetActive(true);
 	}
 }
