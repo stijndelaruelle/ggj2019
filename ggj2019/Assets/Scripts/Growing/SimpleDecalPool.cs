@@ -16,7 +16,7 @@ public class SimpleDecalPool : MonoBehaviour
     //Methods
     private void Start()
     {
-        LevelDirector.Instance.LevelResetEvent += OnLevelReset;
+        LevelDirector.Instance.LevelStopEvent += OnLevelStart;
 
         //Spawn all the decals
         m_Decals = new List<GameObject>();
@@ -52,7 +52,7 @@ public class SimpleDecalPool : MonoBehaviour
 
         if (m_CurrentDecalID >= m_Decals.Count)
         {
-            Debug.LogWarning("Out of decals! Reusing older decals for now, but maybe you should spawn more!");
+            //Debug.LogWarning("Out of decals! Reusing older decals for now, but maybe you should spawn more!");
             m_CurrentDecalID = 0;
         }
 
@@ -62,7 +62,7 @@ public class SimpleDecalPool : MonoBehaviour
         m_CurrentDecalID += 1;
     }
 
-    private void OnLevelReset()
+    private void OnLevelStart()
     {
         for (int i = 0; i < m_Decals.Count; ++i)
         {

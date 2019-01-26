@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sjabloon;
 
-public class GrowingPickup : MonoBehaviour
+public class StartPanelUI : MonoBehaviour
 {
     [SerializeField]
-    private float m_GrowAmount;
+    private CanvasGroup m_CanvasGroup;
 
     private void Start()
     {
         LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+        LevelDirector.Instance.LevelStopEvent += OnLevelStop;
+
+        m_CanvasGroup.Show(true);
     }
 
     private void OnDestroy()
@@ -17,22 +21,19 @@ public class GrowingPickup : MonoBehaviour
         LevelDirector levelDirector = LevelDirector.Instance;
 
         if (levelDirector != null)
-            levelDirector.LevelStartEvent -= OnLevelStart;
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        IGrowable growable = collision.GetComponent<IGrowable>();
-
-        if (growable != null)
         {
-            growable.Grow(m_GrowAmount);
-            gameObject.SetActive(false);
-        } 
+            levelDirector.LevelStartEvent -= OnLevelStart;
+            levelDirector.LevelStopEvent -= OnLevelStop;
+        }
     }
 
     private void OnLevelStart()
     {
-        gameObject.SetActive(true);
+        m_CanvasGroup.Show(false);
+    }
+
+    private void OnLevelStop()
+    {
+        m_CanvasGroup.Show(true);
     }
 }
