@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 {
 
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition);
+	public delegate void GrowDelegate(float newSize); 
 
 	[SerializeField]
 	private float m_MoveSpeed;
@@ -54,7 +55,8 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	//Events
 	public event MoveDelegate MoveEvent;
-
+	public event GrowDelegate GrowEvent; 
+	
 
 	//Methods
 	private void Start()
@@ -204,6 +206,9 @@ public class PlayerController : MonoBehaviour, IGrowable
 	private void SetSize(float size)
 	{
 		m_CurrentSize = size;
+
+		if (GrowEvent != null)
+			GrowEvent(m_CurrentSize);
 
 		//Gameplay adjusts immediatly
 		if (m_Collider != null)

@@ -7,9 +7,19 @@ public class GrowingPickup : MonoBehaviour
 	[SerializeField]
 	private float m_GrowAmount;
 
+	[SerializeField]
+	private float m_PickupSize;
+
+	private Collider2D m_Collider; 
+
 	private void Start()
 	{
 		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+
+		m_Collider = GetComponent<Collider2D>(); 
+
+		if (m_Collider != null)
+			m_Collider.isTrigger = false; 
 	}
 
 	private void OnDestroy()
@@ -34,5 +44,11 @@ public class GrowingPickup : MonoBehaviour
 			growable.Grow(m_GrowAmount);
 			gameObject.SetActive(false);
 		}
+	}
+
+	public void OnPlayerGrowth(float newSize)
+	{
+		if (newSize >= m_PickupSize && m_Collider != null)
+			m_Collider.isTrigger = true; 
 	}
 }

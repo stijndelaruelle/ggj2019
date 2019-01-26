@@ -5,18 +5,60 @@ using UnityEngine;
 public class PickupManager : MonoBehaviour
 {
 	[SerializeField]
-	private Collider2D m_BoundingArea;
+	private PlayerController m_PlayerController; 
 
 	[SerializeField]
-	private GrowingPickup m_PickupPrefab;
+	private Transform m_LocationContainer;
 
 	[SerializeField]
-	private int m_Amount;
+	private Transform m_PickupContainer; 
 
-	private List<GrowingPickup> m_Pickups;
+	[SerializeField]
+	private GrowingPickup[] m_PickupPrefabs;
+
+	private List<Transform> m_SpawnLocations;
+
+	private List<GrowingPickup> m_Pickups; 
 
 	private void Start()
 	{
-		
+		m_Pickups = new List<GrowingPickup>(); 
+
+		m_PlayerController.GrowEvent += OnPlayerGrowth; 
+
+		GetLocations();
+		SpawnPickups(); 
+	}
+
+	private void GetLocations()
+	{
+		m_SpawnLocations = new List<Transform>();
+
+		Transform[] locations = m_LocationContainer.GetComponentsInChildren<Transform>();
+
+		foreach (Transform location in locations)
+		{
+			if (location != m_LocationContainer)
+				m_SpawnLocations.Add(location);
+		}
+	}
+
+	private void SpawnPickups()
+	{
+		foreach (Transform location in m_SpawnLocations)
+		{
+			int rnd = Random.Range(0, m_PickupPrefabs.Length - 1); 
+
+			GrowingPickup pickup = Instantiate(m_PickupPrefabs[rnd], location.position, Quaternion.identity, m_PickupContainer);
+			pickup.OnPlayerGrowth(m_PlayerController.Size); 
+
+			m_Pickups.Add(pickup); 
+		}
+	}
+
+	private void OnPlayerGrowth(float newSize)
+	{
+		foreach (GrowingPickup pickup in m_Pickups)
+			pickup.OnPlayerGrowth(newSize); 
 	}
 }

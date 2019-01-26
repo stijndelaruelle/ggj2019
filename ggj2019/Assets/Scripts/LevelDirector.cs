@@ -49,7 +49,7 @@ public class LevelDirector : Singleton<LevelDirector>
         m_IsLevelStarted = true;
     }
 
-    private void StopLevel()
+    public void StopLevel()
     {
         if (LevelStopEvent != null)
             LevelStopEvent();
