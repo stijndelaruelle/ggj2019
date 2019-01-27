@@ -98,7 +98,7 @@ public class GrowLevelGenerator : MonoBehaviour
                 //Actually spawn the pickup
                 GrowingPickup newPickup = GameObject.Instantiate<GrowingPickup>(m_PickupPrefab, this.transform);
                 newPickup.PickupData = dungballData.GetPickupData(dungBallPickupID);
-                newPickup.SetIndoorSprite();
+                newPickup.SetSprite();
 
                 newPickup.transform.position = dir * (radiusOffsetPerRing * (ringID + 1));
                 dungBallPickupID += 1;

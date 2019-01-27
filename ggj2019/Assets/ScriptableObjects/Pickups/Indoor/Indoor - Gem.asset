@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f560ec5efbbdb48b55405cf738500c, type: 3}
-  m_Name: Stone
+  m_Script: {fileID: 11500000, guid: 490781b3806a18f479a9aa5fd9f349f0, type: 3}
+  m_Name: Indoor - Gem
   m_EditorClassIdentifier: 
   m_GrowAmount: 0
-  m_MoveSpeedAmount: 0
-  m_PickupSize: 0
+  m_MoveSpeedAmount: 1
+  m_Sprite: {fileID: 21300000, guid: 2d1b8f36d35b743469478991749f2948, type: 3}
   m_DealsDamage: 0
-  m_OutdoorSprite: {fileID: 0}
-  m_IndoorSprite: {fileID: 21300000, guid: 5e28e18ad3220e64687641ddfebed92e, type: 3}

@@ -60,7 +60,11 @@ public class PickupManager : MonoBehaviour
 
 	private void OnPickup(GrowingPickup pickup)
 	{
-		pickup.PickupEvent -= OnPickup; 
-		m_DungballData.AddPickup(pickup.PickupData); 
+		pickup.PickupEvent -= OnPickup;
+
+        PickupData pickupData = pickup.PickupData;
+        
+        if (pickupData is OutdoorPickupData)
+            m_DungballData.AddPickup(((OutdoorPickupData)pickupData).IndoorPickupData);
 	}
 }

@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f560ec5efbbdb48b55405cf738500c, type: 3}
-  m_Name: Gem
+  m_Name: Outdoor - Dung
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0
-  m_MoveSpeedAmount: 1
-  m_PickupSize: 1
-  m_DealsDamage: 0
-  m_OutdoorSprite: {fileID: 21300000, guid: a8cacdeb6bece954d8562c200c7a92b1, type: 3}
-  m_IndoorSprite: {fileID: 21300000, guid: 2d1b8f36d35b743469478991749f2948, type: 3}
+  m_GrowAmount: 0.1
+  m_MoveSpeedAmount: 0
+  m_Sprite: {fileID: 21300000, guid: 83ae927cc25ef714c8145240e99ce141, type: 3}
+  m_PickupSize: 0
+  m_IndoorPickupData: {fileID: 11400000, guid: 0a52d74e392ef1044a48a485eacf4622, type: 2}

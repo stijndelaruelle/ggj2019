@@ -57,7 +57,15 @@ public class GrowingPickup : MonoBehaviour
             if (growable != null)
             {
                 //Check if we should get picked up!
-                if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
+                bool canPickup = true;
+
+                if (m_PickupData is OutdoorPickupData)
+                {
+                    if (growable.Size < ((OutdoorPickupData)m_PickupData).PickupSize || m_Collider == null)
+                        canPickup = false;
+                }
+
+                if (canPickup)
                 {
                     if (PickupEvent != null)
                         PickupEvent(this);
@@ -81,12 +89,15 @@ public class GrowingPickup : MonoBehaviour
         }
 
         //Damage
-        if (m_PickupData.DealsDamage)
+        if (m_PickupData is IndoorPickupData)
         {
-            IDamageable damageable = collision.collider.GetComponent<IDamageable>();
+            if (((IndoorPickupData)m_PickupData).DealsDamage)
+            {
+                IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
-            if (damageable != null)
-                damageable.Damage();
+                if (damageable != null)
+                    damageable.Damage();
+            }
         }
     }
 
@@ -96,15 +107,9 @@ public class GrowingPickup : MonoBehaviour
 			m_SpriteRenderer.sprite = sprite; 
 	}
 
-    public void SetOutdoorSprite()
+    public void SetSprite()
     {
         if (m_PickupData != null)
-            SetSprite(m_PickupData.OutdoorSprite);
-    }
-
-    public void SetIndoorSprite()
-    {
-        if (m_PickupData != null)
-            SetSprite(m_PickupData.IndoorSprite);
+            SetSprite(m_PickupData.Sprite);
     }
 }
