@@ -2,11 +2,15 @@
 
 public class NotificationController : MonoBehaviour
 {
+	public delegate void PickupNotificationEvent(int id, float duration); 
+
 	[SerializeField]
 	private StringValue m_NotificationText;
 
 	[SerializeField]
 	private EmotionPanel m_EmotionPanel;
+
+	public static event PickupNotificationEvent PickupNotification; 
 
 	private void Awake()
 	{
@@ -20,11 +24,13 @@ public class NotificationController : MonoBehaviour
 
 	private void OnPickupEvent(GrowingPickup pickup)
 	{
-		if (pickup.PickupData.MoveSpeedAmount > 0)
-			m_EmotionPanel.Emote(0, 1.0f);
+		int notificationType = 0; 
 
-		if (pickup.PickupData.GrowAmount > 0)
-			m_EmotionPanel.Emote(0, 1.0f); 
+		if (pickup.PickupData.MoveSpeedAmount > 0)
+			notificationType = 1;
+
+		if (PickupNotification != null)
+			PickupNotification(notificationType, 1.0f); 
 	}
 
 	public void Notify(string message)

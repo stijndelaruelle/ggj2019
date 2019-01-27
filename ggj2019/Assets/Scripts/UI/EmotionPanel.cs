@@ -9,20 +9,80 @@ public class EmotionPanel : MonoBehaviour
 	private Image m_EmoteImage;
 
 	[SerializeField] 
-	private Sprite[] m_EmotionSprites;
+	private Emoticons[] m_EmoticonCollections;
 
-	public void Emote(int emotion, float duration)
+	[SerializeField]
+	private bool m_AndroidVersion;
+
+	private void Awake()
 	{
-		if (emotion >= m_EmotionSprites.Length)
+#if UNITY_ANDROID
+		if (!m_AndroidVersion)
+		{
+			gameObject.SetActive(false);
+		}
+		else
+			NotificationController.PickupNotification += Emote;
+#endif
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+		if (m_AndroidVersion)
+		{
+			gameObject.SetActive(false);
+		}
+		else NotificationController.PickupNotification += Emote;
+#endif
+
+		BallShrinkingSurface.ShrinkingSurfaceEnterEvent += OnShrinkingSurfaceEnter;
+		BallShrinkingSurface.ShrinkingSurfaceExitEvent += OnShrinkingSurfaceExit;
+	}
+
+	private void OnDestroy()
+	{
+#if UNITY_ANDROID
+		if (m_AndroidVersion)
+			NotificationController.PickupNotification -= Emote;
+#endif
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+		if (!m_AndroidVersion)
+			NotificationController.PickupNotification -= Emote;
+#endif
+
+		BallShrinkingSurface.ShrinkingSurfaceEnterEvent -= OnShrinkingSurfaceEnter;
+		BallShrinkingSurface.ShrinkingSurfaceExitEvent -= OnShrinkingSurfaceExit;
+	}
+
+
+	private void OnShrinkingSurfaceEnter()
+	{
+		Debug.Log("Shrinking surface entered"); 
+		Emote(2);
+	}
+
+	private void OnShrinkingSurfaceExit()
+	{
+		Hide(); 
+	}
+
+	private void Emote(int emotion, float duration)
+	{
+		Emote(emotion); 
+
+		Invoke("Hide", duration); 
+	}
+
+	private void Emote(int emotion)
+	{
+		if (emotion >= m_EmoticonCollections.Length)
 		{
 			Hide();
 			return;
 		}
 
-		m_EmoteImage.sprite = m_EmotionSprites[emotion];
+		int rnd = Random.Range(0, m_EmoticonCollections[emotion].EmoticonSprites.Length);
+		m_EmoteImage.sprite = m_EmoticonCollections[emotion].EmoticonSprites[rnd];
 		m_EmoteImage.enabled = true;
-
-		Invoke("Hide", duration); 
 	}
 
 	private void Hide()
