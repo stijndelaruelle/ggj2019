@@ -33,6 +33,7 @@ public class PickupManager : MonoBehaviour
 
 	private void GetLocations()
 	{
+		m_DungballData.ClearPickups(); 
 		m_SpawnLocations = new List<Transform>();
 
 		Transform[] locations = m_LocationContainer.GetComponentsInChildren<Transform>();
