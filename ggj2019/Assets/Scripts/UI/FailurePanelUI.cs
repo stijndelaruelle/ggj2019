@@ -6,7 +6,10 @@ public class FailurePanelUI : MonoBehaviour
 	[SerializeField]
 	private CanvasGroup m_CanvasGroup;
 
-	private void Start()
+    [SerializeField]
+    private AudioSource m_DefeatJingle;
+
+    private void Start()
 	{
 		LevelDirector levelDirector = LevelDirector.Instance;
 
@@ -38,5 +41,8 @@ public class FailurePanelUI : MonoBehaviour
     {
         if (m_CanvasGroup != null)
             m_CanvasGroup.Show(true);
+
+        if (m_DefeatJingle != null)
+            m_DefeatJingle.Play();
     }
 }
