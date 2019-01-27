@@ -30,7 +30,7 @@ public class LevelDirector : Singleton<LevelDirector>
             LevelUpdateEvent();
 
         if (Input.GetKeyDown(KeyCode.R))
-            StopLevel();
+            CompleteLevel(false);
     }
 
     private void FixedUpdate()

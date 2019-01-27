@@ -69,7 +69,12 @@ public class GrowingPickup : MonoBehaviour
 
         if (m_PickupData.DealsDamage)
         {
-            //TODO
+            IDamageable damageable = collision.collider.GetComponent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.Damage();
+            }
         }
     }
 

@@ -13,7 +13,8 @@ public class FailurePanelUI : MonoBehaviour
 		if (levelDirector == null)
 			return;
 
-		levelDirector.LevelFailed += OnLevelFailed; 
+        levelDirector.LevelStartEvent += OnLevelStart;
+        levelDirector.LevelFailed += OnLevelFailed; 
 	}
 
 	private void OnDestroy()
@@ -23,11 +24,19 @@ public class FailurePanelUI : MonoBehaviour
 		if (levelDirector == null)
 			return;
 
-		levelDirector.LevelFailed -= OnLevelFailed; 
+        levelDirector.LevelStartEvent -= OnLevelStart;
+        levelDirector.LevelFailed -= OnLevelFailed; 
 	}
 
-	private void OnLevelFailed()
-	{
-		m_CanvasGroup.Show(true); 
-	}
+    private void OnLevelStart()
+    {
+        if (m_CanvasGroup != null)
+            m_CanvasGroup.Show(false);
+    }
+
+    private void OnLevelFailed()
+    {
+        if (m_CanvasGroup != null)
+            m_CanvasGroup.Show(true);
+    }
 }

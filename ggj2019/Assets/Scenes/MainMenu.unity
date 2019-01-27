@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f81c798af9f404b9b687d7e0e969f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GrowSceneName: GrowingScene
+  m_SceneName: GrowingScene
 --- !u!1 &1131851909
 GameObject:
   m_ObjectHideFlags: 0
