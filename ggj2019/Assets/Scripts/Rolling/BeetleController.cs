@@ -24,7 +24,7 @@ public class BeetleController : MonoBehaviour
 			return;
 
 		levelDirector.LevelStartEvent += OnLevelStart;
-		levelDirector.LevelStopEvent -= OnLevelStop;
+		levelDirector.LevelStopEvent += OnLevelStop;
 	}
 
 	private void OnDestroy()

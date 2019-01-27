@@ -32,4 +32,9 @@ public class DungballData : ScriptableObject
 
         return 0;
     }
+
+	public void ClearPickups()
+	{
+		m_DungballData = new List<PickupData>();
+	}
 }

@@ -19,6 +19,6 @@ public class GrowExit : MonoBehaviour
         if (m_Border.IsBroken() == false)
             return;
 
-        SceneManager.LoadScene(m_SceneName);
+        LevelDirector.Instance.CompleteLevel(true);
     }
 }

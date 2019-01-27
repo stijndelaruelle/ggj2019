@@ -3,9 +3,9 @@ using Sjabloon;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IGrowable
+public class PlayerController : MonoBehaviour, IGrowable, IDamageable
 {
-	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition);
+	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition, Quaternion newRotation);
 
 	[SerializeField]
 	private float m_StartMoveSpeed;
@@ -22,18 +22,14 @@ public class PlayerController : MonoBehaviour, IGrowable
 	[Header("Growing")]
 	[SerializeField]
 	private Transform m_VisualTransform;
+    private float m_StartVisualSize;
 
-	[SerializeField]
+    [SerializeField]
 	private CircleCollider2D m_Collider;
 	public float ColliderSize
 	{
 		get { return m_Collider.radius; }
 	}
-
-	[Space(5)]
-	[Header("Visuals")]
-	[SerializeField]
-	private SimpleDecalPool m_DecalPool;
 
 	//Movement
 	private Vector3 m_StartGyroAttitudeToEuler;
@@ -64,16 +60,16 @@ public class PlayerController : MonoBehaviour, IGrowable
 		m_StartPosition = transform.position.Copy();
 		m_StartSize = 1.0f;
 
-		if (m_VisualTransform != null)
-			m_StartSize = m_VisualTransform.localScale.x;
-
-		m_CurrentMoveSpeed = m_StartMoveSpeed;
-		m_CurrentSize = m_StartSize;
+        if (m_VisualTransform != null)
+            m_StartVisualSize = m_VisualTransform.localScale.x;
 
 		if (m_Collider != null)
 			m_StartRadius = m_Collider.radius;
 
-		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+        m_CurrentMoveSpeed = m_StartMoveSpeed;
+        m_CurrentSize = m_StartSize;
+
+        LevelDirector.Instance.LevelStartEvent += OnLevelStart;
 		//LevelDirector.Instance.LevelStopEvent += OnLevelStop;
 		LevelDirector.Instance.LevelUpdateEvent += OnLevelUpdate;
 		//LevelDirector.Instance.LevelFixedUpdateEvent += OnLevelFixedUpdate;
@@ -155,16 +151,16 @@ public class PlayerController : MonoBehaviour, IGrowable
 		offset.x = inputManager.GetAxis("PlayerWorm_Vertical") * m_CurrentMoveSpeed * Time.deltaTime;
 		offset.y = inputManager.GetAxis("PlayerWorm_Horizontal") * m_CurrentMoveSpeed * Time.deltaTime;
 
-		//Place decals along this axis
-		if (m_DecalPool != null && offset.sqrMagnitude > 0.0f)
-			m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
-
 		m_CurrentDirection = offset.normalized;
-		transform.Translate(offset);
 
-		//Let the world know!
-		if (MoveEvent != null)
-			MoveEvent(this, transform.position);
+        if (offset.sqrMagnitude > 0.0f)
+        {
+            transform.Translate(offset);
+
+            //Let the world know!
+            if (MoveEvent != null)
+                MoveEvent(this, transform.position, transform.rotation);
+        }
 	}
 
 	private void GyroMove()
@@ -190,22 +186,32 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 		Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
 
-		//Place decals along this axis
-		if (m_DecalPool != null && dir.sqrMagnitude > 0.0f)
-			m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
+        if (offset.sqrMagnitude > 0.0f)
+        {
+            transform.position += offset;
+            transform.rotation = Quaternion.Euler(0f, 0f, -deltaEulerAngles.z);
 
-		transform.Translate(offset);
-
-		//Let the world know!
-		if (MoveEvent != null)
-			MoveEvent(this, transform.position);
+            //Let the world know!
+            if (MoveEvent != null)
+                MoveEvent(this, transform.position, transform.rotation);
+        }
 	}
 
 	public void Grow(float amount)
 	{
         m_CurrentMoveSpeed += (amount * 10.0f); //Cheese!
 		SetSize(m_CurrentSize + amount);
+
+        if (GrowEvent != null)
+            GrowEvent(m_CurrentSize);
 	}
+
+    public void Damage()
+    {
+        //Hide
+        SetSize(0);
+        LevelDirector.Instance.CompleteLevel(false);
+    }
 
 	public void SetPosition(Vector3 position)
 	{
@@ -214,6 +220,9 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 	private void SetSize(float size)
 	{
+		if (size < 0)
+			return; 
+
 		m_CurrentSize = size;
 
 		//Gameplay adjusts immediatly
@@ -222,7 +231,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 		//Visuals can take their time
 		if (m_VisualTransform != null)
-			m_VisualTransform.DOScale(m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
+			m_VisualTransform.DOScale(m_StartVisualSize * m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
 
 		//Fail level when you lose your ball
 		if (m_CurrentSize < m_MinSize)
@@ -232,7 +241,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 	//Accessors
 	public float GetPower()
 	{
-		return (m_CurrentSize); //m_CurrentMoveSpeed * 
+        return m_CurrentMoveSpeed;// * //m_CurrentSize); // * 
     }
 
 	//Debug

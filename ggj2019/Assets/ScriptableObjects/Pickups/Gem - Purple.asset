@@ -16,4 +16,4 @@ MonoBehaviour:
   m_PickupSize: 0.6
   m_IsBadIndoors: 0
   m_OutdoorSprite: {fileID: 21300000, guid: ae14111d2a0cc1b43877ebeac792afc0, type: 3}
-  m_IndoorSprite: {fileID: 0}
+  m_IndoorSprite: {fileID: 21300000, guid: ae14111d2a0cc1b43877ebeac792afc0, type: 3}

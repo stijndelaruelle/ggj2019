@@ -10,6 +10,8 @@ public class LevelDirector : Singleton<LevelDirector>
     public event VoidDelegate LevelStartEvent;
     public event VoidDelegate LevelStopEvent;
     public event VoidDelegate LevelUpdateEvent;
+	public event VoidDelegate LevelSucces;
+	public event VoidDelegate LevelFailed; 
     //public event VoidDelegate LevelFixedUpdateEvent;
 
     private bool m_IsLevelStarted = false;
@@ -28,7 +30,7 @@ public class LevelDirector : Singleton<LevelDirector>
             LevelUpdateEvent();
 
         if (Input.GetKeyDown(KeyCode.R))
-            StopLevel();
+            CompleteLevel(false);
     }
 
     private void FixedUpdate()
@@ -59,9 +61,9 @@ public class LevelDirector : Singleton<LevelDirector>
 
 	public void CompleteLevel(bool succes)
 	{
-		if (LevelStopEvent != null)
-			LevelStopEvent();
+		StopLevel();
 
-		m_IsLevelStarted = false; 
+		if (succes) LevelSucces?.Invoke(); 
+		else LevelFailed?.Invoke();
 	}
 }
