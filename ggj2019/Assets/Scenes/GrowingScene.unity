@@ -1504,7 +1504,7 @@ MonoBehaviour:
     type: 2}
   m_FallBackDungballData: {fileID: 11400000, guid: ea779146ad747ad4581d4550a0ca98ca,
     type: 2}
-  m_PickupPrefab: {fileID: 8184499352490146014, guid: cb6aa55599525334a80a92051b4c13cb,
+  m_PickupPrefab: {fileID: 369559743361406200, guid: 9cdfa09e3bbd38c41af6cfffb5aa43ea,
     type: 3}
   m_Radius: 25
   m_PickupsPerRing: 0300000005000000080000000d00000015000000
@@ -1661,11 +1661,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 235426528285227962, guid: 1e5da16129861324184056471f2320f7,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 235426529707066343, guid: 1e5da16129861324184056471f2320f7,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1675,6 +1670,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FadeImage
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 235426528285227962, guid: 1e5da16129861324184056471f2320f7,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5da16129861324184056471f2320f7, type: 3}
@@ -1980,6 +1980,11 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8073837480214203208, guid: 260effd573ae063449a13508337cba69,
+        type: 3}
+      propertyPath: m_FadeImage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8073837480214203212, guid: 260effd573ae063449a13508337cba69,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1989,11 +1994,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 434.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8073837480214203208, guid: 260effd573ae063449a13508337cba69,
-        type: 3}
-      propertyPath: m_FadeImage
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4886913178153580103, guid: 260effd573ae063449a13508337cba69,
         type: 3}

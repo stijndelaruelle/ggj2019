@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fee7bd7ea4a5924795950de57dc67b3, type: 3}
   m_Name: Player SaveGame
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 5
+  m_MoveSpeed: 9
