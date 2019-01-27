@@ -13,4 +13,11 @@ public class IndoorPickupData : PickupData
     {
         get { return m_DealsDamage; }
     }
+
+    [SerializeField]
+    private bool m_CanBePickedUp = true;
+    public bool CanBePickedUp
+    {
+        get { return m_CanBePickedUp; }
+    }
 }

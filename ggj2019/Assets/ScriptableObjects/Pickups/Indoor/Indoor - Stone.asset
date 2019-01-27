@@ -16,3 +16,4 @@ MonoBehaviour:
   m_MoveSpeedAmount: 0
   m_Sprite: {fileID: 21300000, guid: 5e28e18ad3220e64687641ddfebed92e, type: 3}
   m_DealsDamage: 0
+  m_CanBePickedUp: 0
