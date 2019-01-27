@@ -46,3 +46,4 @@ public class FailurePanelUI : MonoBehaviour
             m_DefeatJingle.Play();
     }
 }
+

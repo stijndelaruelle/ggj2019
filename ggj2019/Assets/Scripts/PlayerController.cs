@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
         }
 	}
 
-	private void GyroMove()
+    private void GyroMove()
 	{
 		Vector3 deltaEulerAngles = m_StartGyroAttitudeToEuler - Input.gyro.attitude.eulerAngles;
 
@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 
         #if UNITY_STANDALONE || UNITY_EDITOR
             dir.x *= -1;
+
         #endif
 
         m_CurrentDirection = dir.normalized;
