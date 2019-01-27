@@ -27,7 +27,9 @@ public class GrowingPickup : MonoBehaviour
 
 	private void Start()
 	{
-		LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+        if (LevelDirector.Instance != null)
+		    LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+
 		m_Collider = GetComponent<Collider2D>();
 	}
 

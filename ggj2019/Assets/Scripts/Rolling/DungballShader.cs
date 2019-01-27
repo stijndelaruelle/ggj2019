@@ -5,6 +5,9 @@ using UnityEngine;
 public class DungballShader : MonoBehaviour
 {
     [SerializeField]
+    private PlayerController m_DungBall;
+
+    [SerializeField]
     private MeshRenderer m_MeshRenderer;
     private Vector2 m_UVOffset;
 
