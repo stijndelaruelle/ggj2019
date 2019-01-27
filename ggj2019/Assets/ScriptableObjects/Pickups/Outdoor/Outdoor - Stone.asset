@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f560ec5efbbdb48b55405cf738500c, type: 3}
   m_Name: Outdoor - Stone
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0
+  m_GrowAmount: 0.1
   m_MoveSpeedAmount: 0
   m_Sprite: {fileID: 21300000, guid: 4cefaa1cc1f3960479ca61d7f9193740, type: 3}
   m_PickupSize: 0
