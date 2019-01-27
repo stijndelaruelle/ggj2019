@@ -18,10 +18,10 @@ public class Hole : MonoBehaviour
 			return;
 
 		if(player.Size <= m_WarningSize) 
-			m_NotificationController.Notify("My ball is too small! I need to collect some more shit.");
+			m_NotificationController.Notify("Mijn bal is te klein, ik heb meer spullen nodig!");
 
 		if (player.Size >= m_MaxSize)
-			m_NotificationController.Notify("My ball is too large! I can't enter the hole."); 
+			m_NotificationController.Notify("Mijn bal is te groot, ik pas niet meer door de ingang!"); 
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
