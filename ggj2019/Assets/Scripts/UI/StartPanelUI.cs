@@ -11,7 +11,6 @@ public class StartPanelUI : MonoBehaviour
     private void Start()
     {
         LevelDirector.Instance.LevelStartEvent += OnLevelStart;
-        LevelDirector.Instance.LevelStopEvent += OnLevelStop;
 
         m_CanvasGroup.Show(true);
     }
@@ -21,10 +20,7 @@ public class StartPanelUI : MonoBehaviour
         LevelDirector levelDirector = LevelDirector.Instance;
 
         if (levelDirector != null)
-        {
             levelDirector.LevelStartEvent -= OnLevelStart;
-            levelDirector.LevelStopEvent -= OnLevelStop;
-        }
     }
 
     private void OnLevelStart()

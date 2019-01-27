@@ -37,6 +37,6 @@ public class Hole : MonoBehaviour
 			return;
 
 		if (player.Size <= m_MaxSize)
-			LevelDirector.Instance.StopLevel(); 
+			LevelDirector.Instance.CompleteLevel(true); 
 	}
 }
