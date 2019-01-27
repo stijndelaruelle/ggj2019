@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f560ec5efbbdb48b55405cf738500c, type: 3}
   m_Name: Outdoor - Cactus
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0
+  m_GrowAmount: 0.02
   m_MoveSpeedAmount: 0
   m_Sprite: {fileID: 21300000, guid: 9b9480f31f658e74cba07443daa24eb0, type: 3}
   m_PickupSize: 1
