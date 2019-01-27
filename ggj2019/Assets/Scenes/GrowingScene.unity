@@ -1582,7 +1582,7 @@ MonoBehaviour:
     m_VisualColor: {r: 0.67058825, g: 0.42352945, b: 0.69411767, a: 0.5019608}
   - m_RequiredPower: 6
     m_VisualColor: {r: 0.49803925, g: 0.454902, b: 0.6509804, a: 0.5019608}
-  - m_RequiredPower: 8
+  - m_RequiredPower: 7
     m_VisualColor: {r: 0.46274513, g: 0.16078432, b: 0.27058825, a: 0.5019608}
   - m_RequiredPower: 999
     m_VisualColor: {r: 0.3372549, g: 0.13725491, b: 0.24313727, a: 0.5019608}

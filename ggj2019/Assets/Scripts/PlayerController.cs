@@ -214,7 +214,12 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
         if (offset.sqrMagnitude > 0.0f)
         {
             transform.position += offset;
-            transform.rotation = Quaternion.Euler(0f, 0f, -deltaEulerAngles.z);
+
+            #if UNITY_STANDALONE || UNITY_EDITOR
+                transform.rotation = Quaternion.Euler(0f, 0f, -deltaEulerAngles.z);
+            #else
+                transform.rotation = Quaternion.Euler(0f, 0f, deltaEulerAngles.z);
+            #endif
 
             //Let the world know!
             if (MoveEvent != null)
