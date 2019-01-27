@@ -13,10 +13,14 @@ public class GrowLarvaeTail : MonoBehaviour
 
     [SerializeField]
     private PlayerController m_Player;
-    private Quaternion m_LastRotation = Quaternion.identity;
 
     private void Start()
     {
+        if (LevelDirector.Instance != null)
+        {
+            LevelDirector.Instance.LevelStartEvent += OnLevelStart;
+        }
+
         if (m_Player != null)
         {
             m_Player.MoveEvent += OnPlayerMove;
@@ -26,6 +30,11 @@ public class GrowLarvaeTail : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (LevelDirector.Instance != null)
+        {
+            LevelDirector.Instance.LevelStartEvent -= OnLevelStart;
+        }
+
         if (m_Player != null)
         {
             m_Player.MoveEvent -= OnPlayerMove;
@@ -33,12 +42,15 @@ public class GrowLarvaeTail : MonoBehaviour
         }
     }
 
+    private void OnLevelStart()
+    {
+        transform.DOKill();
+        transform.localPosition = new Vector3(0.0f, m_MinY, 0.0f);
+    }
+
     private void OnPlayerMove(PlayerController player, Vector3 position, Quaternion rotation)
     {
-        if (m_LastRotation == Quaternion.identity) { transform.rotation = rotation; }
-        else                                       { transform.rotation = m_LastRotation; }
-
-        m_LastRotation = rotation;
+        transform.DORotateQuaternion(rotation, 0.5f);
     }
 
     private void OnPlayerGrow(float newSize)

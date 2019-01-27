@@ -16,7 +16,7 @@ public class SimpleDecalPool : MonoBehaviour
     //Methods
     private void Start()
     {
-        LevelDirector.Instance.LevelStopEvent += OnLevelStart;
+        LevelDirector.Instance.LevelStartEvent += OnLevelStart;
 
         //Spawn all the decals
         m_Decals = new List<GameObject>();

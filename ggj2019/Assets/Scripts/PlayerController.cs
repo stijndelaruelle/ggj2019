@@ -31,11 +31,6 @@ public class PlayerController : MonoBehaviour, IGrowable
 		get { return m_Collider.radius; }
 	}
 
-	[Space(5)]
-	[Header("Visuals")]
-	[SerializeField]
-	private SimpleDecalPool m_DecalPool;
-
 	//Movement
 	private Vector3 m_StartGyroAttitudeToEuler;
 	private float m_DebugGyroAngle;
@@ -156,16 +151,16 @@ public class PlayerController : MonoBehaviour, IGrowable
 		offset.x = inputManager.GetAxis("PlayerWorm_Vertical") * m_CurrentMoveSpeed * Time.deltaTime;
 		offset.y = inputManager.GetAxis("PlayerWorm_Horizontal") * m_CurrentMoveSpeed * Time.deltaTime;
 
-		//Place decals along this axis
-		if (m_DecalPool != null && offset.sqrMagnitude > 0.0f)
-			m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
-
 		m_CurrentDirection = offset.normalized;
-		transform.Translate(offset);
 
-		//Let the world know!
-		if (MoveEvent != null)
-			MoveEvent(this, transform.position, transform.rotation);
+        if (offset.sqrMagnitude > 0.0f)
+        {
+            transform.Translate(offset);
+
+            //Let the world know!
+            if (MoveEvent != null)
+                MoveEvent(this, transform.position, transform.rotation);
+        }
 	}
 
 	private void GyroMove()
@@ -191,16 +186,15 @@ public class PlayerController : MonoBehaviour, IGrowable
 
 		Vector3 offset = m_CurrentMoveSpeed * m_CurrentDirection * Time.deltaTime;
 
-		//Place decals along this axis
-		if (m_DecalPool != null && dir.sqrMagnitude > 0.0f)
-			m_DecalPool.PlaceDecal(new Vector3(transform.position.x + (offset.x * 0.5f), transform.position.y + (offset.y * 0.5f), 0.0f));
+        if (offset.sqrMagnitude > 0.0f)
+        {
+            transform.position += offset;
+            transform.rotation = Quaternion.Euler(0f, 0f, -deltaEulerAngles.z);
 
-		transform.position += offset;
-        transform.rotation = Quaternion.Euler(0f, 0f, -deltaEulerAngles.z);
-
-        //Let the world know!
-        if (MoveEvent != null)
-			MoveEvent(this, transform.position, transform.rotation);
+            //Let the world know!
+            if (MoveEvent != null)
+                MoveEvent(this, transform.position, transform.rotation);
+        }
 	}
 
 	public void Grow(float amount)
