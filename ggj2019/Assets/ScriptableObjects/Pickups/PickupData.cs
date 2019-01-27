@@ -15,6 +15,13 @@ public class PickupData : ScriptableObject
     }
 
     [SerializeField]
+    private float m_MoveSpeedAmount;
+    public float MoveSpeedAmount
+    {
+        get { return m_MoveSpeedAmount; }
+    }
+
+    [SerializeField]
     private float m_PickupSize;
     public float PickupSize
     {

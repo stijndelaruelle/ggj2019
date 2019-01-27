@@ -49,6 +49,7 @@ public class GrowingPickup : MonoBehaviour
         if (m_PickupData == null)
             return;
 
+        //Growing
         if (m_PickupData.GrowAmount > 0.0f)
         {
             IGrowable growable = collision.collider.GetComponent<IGrowable>();
@@ -67,14 +68,25 @@ public class GrowingPickup : MonoBehaviour
             }
         }
 
+        //Move speed
+        if (m_PickupData.MoveSpeedAmount > 0.0f)
+        {
+            IMoveable moveable = collision.collider.GetComponent<IMoveable>();
+
+            if (moveable != null)
+            {
+                moveable.IncreaseMoveSpeed(m_PickupData.MoveSpeedAmount);
+                gameObject.SetActive(false);
+            }
+        }
+
+        //Damage
         if (m_PickupData.DealsDamage)
         {
             IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
             if (damageable != null)
-            {
                 damageable.Damage();
-            }
         }
     }
 

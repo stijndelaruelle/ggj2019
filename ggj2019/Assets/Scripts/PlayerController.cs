@@ -3,7 +3,7 @@ using Sjabloon;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IGrowable, IDamageable
+public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 {
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition, Quaternion newRotation);
 
@@ -18,7 +18,10 @@ public class PlayerController : MonoBehaviour, IGrowable, IDamageable
 	[SerializeField]
 	private float m_DebugRotateSpeed;
 
-	[Space(5)]
+    [SerializeField]
+    private bool m_IsImmune = false;
+
+    [Space(5)]
 	[Header("Growing")]
 	[SerializeField]
 	private Transform m_VisualTransform;
@@ -197,9 +200,35 @@ public class PlayerController : MonoBehaviour, IGrowable, IDamageable
         }
 	}
 
-	public void Grow(float amount)
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    private void SetSize(float size)
+    {
+        if (size < 0)
+            return;
+
+        m_CurrentSize = size;
+
+        //Gameplay adjusts immediatly
+        if (m_Collider != null)
+            m_Collider.radius = m_StartRadius * m_CurrentSize;
+
+        //Visuals can take their time
+        if (m_VisualTransform != null)
+            m_VisualTransform.DOScale(m_StartVisualSize * m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
+
+        //Fail level when you lose your ball
+        if (m_CurrentSize < m_MinSize)
+            LevelDirector.Instance.CompleteLevel(false);
+    }
+
+
+    //Interfaces
+    public void Grow(float amount)
 	{
-        m_CurrentMoveSpeed += (amount * 10.0f); //Cheese!
 		SetSize(m_CurrentSize + amount);
 
         if (GrowEvent != null)
@@ -208,38 +237,22 @@ public class PlayerController : MonoBehaviour, IGrowable, IDamageable
 
     public void Damage()
     {
+        if (m_IsImmune)
+            return;
+
         //Hide
         SetSize(0);
         LevelDirector.Instance.CompleteLevel(false);
     }
 
-	public void SetPosition(Vector3 position)
-	{
-		transform.position = position;
-	}
-
-	private void SetSize(float size)
-	{
-		if (size < 0)
-			return; 
-
-		m_CurrentSize = size;
-
-		//Gameplay adjusts immediatly
-		if (m_Collider != null)
-			m_Collider.radius = m_StartRadius * m_CurrentSize;
-
-		//Visuals can take their time
-		if (m_VisualTransform != null)
-			m_VisualTransform.DOScale(m_StartVisualSize * m_CurrentSize, 0.25f).SetEase(Ease.OutElastic);
-
-		//Fail level when you lose your ball
-		if (m_CurrentSize < m_MinSize)
-			LevelDirector.Instance.CompleteLevel(false);  
+    public void IncreaseMoveSpeed(float amount)
+    {
+        m_CurrentMoveSpeed += amount;
     }
 
-	//Accessors
-	public float GetPower()
+
+    //Accessors
+    public float GetPower()
 	{
         return m_CurrentMoveSpeed;// * //m_CurrentSize); // * 
     }
