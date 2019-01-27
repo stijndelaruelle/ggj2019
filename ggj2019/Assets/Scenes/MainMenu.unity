@@ -534,9 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EmoteImage: {fileID: 615353522}
-  m_EmotionSprites:
-  - {fileID: 21300000, guid: b2274a5305a7aea43b6770a1af42c602, type: 3}
-  - {fileID: 21300002, guid: b2274a5305a7aea43b6770a1af42c602, type: 3}
+  m_EmoticonCollections: []
+  m_AndroidVersion: 0
 --- !u!114 &445600596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,6 +1439,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3747806815925015925, guid: b71ed94fc75444844a0a09aaab940163,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3747806815898126594, guid: b71ed94fc75444844a0a09aaab940163,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1499,11 +1503,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3747806815925015925, guid: b71ed94fc75444844a0a09aaab940163,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3747806815925015927, guid: b71ed94fc75444844a0a09aaab940163,
         type: 3}
@@ -1629,6 +1628,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747806816406702360, guid: b71ed94fc75444844a0a09aaab940163,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747806816894578976, guid: b71ed94fc75444844a0a09aaab940163,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b71ed94fc75444844a0a09aaab940163, type: 3}
