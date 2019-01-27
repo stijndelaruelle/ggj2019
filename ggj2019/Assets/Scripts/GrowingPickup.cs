@@ -49,43 +49,31 @@ public class GrowingPickup : MonoBehaviour
         if (m_PickupData == null)
             return;
 
-        //Growing
-        if (m_PickupData.GrowAmount > 0.0f)
+        IGrowable growable = collision.collider.GetComponent<IGrowable>();
+        IMoveable moveable = collision.collider.GetComponent<IMoveable>();
+
+        //Check if we should get picked up!
+        bool canPickup = true;
+
+        if ((m_PickupData is OutdoorPickupData) && growable != null)
         {
-            IGrowable growable = collision.collider.GetComponent<IGrowable>();
-
-            if (growable != null)
-            {
-                //Check if we should get picked up!
-                bool canPickup = true;
-
-                if (m_PickupData is OutdoorPickupData)
-                {
-                    if (growable.Size < ((OutdoorPickupData)m_PickupData).PickupSize || m_Collider == null)
-                        canPickup = false;
-                }
-
-                if (canPickup)
-                {
-                    if (PickupEvent != null)
-                        PickupEvent(this);
-
-                    growable.Grow(m_PickupData.GrowAmount);
-                    gameObject.SetActive(false);
-                }
-            }
+            if (growable.Size < ((OutdoorPickupData)m_PickupData).PickupSize || m_Collider == null)
+                canPickup = false;
         }
 
-        //Move speed
-        if (m_PickupData.MoveSpeedAmount > 0.0f)
+        if (canPickup)
         {
-            IMoveable moveable = collision.collider.GetComponent<IMoveable>();
+            if (growable != null)
+                growable.Grow(m_PickupData.GrowAmount);
 
             if (moveable != null)
-            {
                 moveable.IncreaseMoveSpeed(m_PickupData.MoveSpeedAmount);
-                gameObject.SetActive(false);
-            }
+
+            //Let the world know!
+            if (PickupEvent != null)
+                PickupEvent(this);
+
+            gameObject.SetActive(false);
         }
 
         //Damage

@@ -50,7 +50,7 @@ public class GrowLarvaeTail : MonoBehaviour
 
     private void OnPlayerMove(PlayerController player, Vector3 position, Quaternion rotation)
     {
-        transform.DORotateQuaternion(rotation, 0.5f);
+        transform.DORotate(rotation.eulerAngles, 0.5f, RotateMode.Fast);
     }
 
     private void OnPlayerGrow(float newSize)
