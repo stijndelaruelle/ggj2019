@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GrowAmount: 0
   m_MoveSpeedAmount: 0
-  m_Sprite: {fileID: 21300000, guid: 5e28e18ad3220e64687641ddfebed92e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b61e09e15d795ef4aba0dae745b34c00, type: 3}
   m_DealsDamage: 1
+  m_CanBePickedUp: 1
