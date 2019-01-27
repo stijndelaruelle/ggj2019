@@ -61,6 +61,12 @@ public class GrowingPickup : MonoBehaviour
                 canPickup = false;
         }
 
+        if (m_PickupData is IndoorPickupData)
+        {
+            if (((IndoorPickupData)m_PickupData).CanBePickedUp == false)
+                canPickup = false;
+        }
+
         if (canPickup)
         {
             if (growable != null)
