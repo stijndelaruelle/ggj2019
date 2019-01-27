@@ -101,15 +101,26 @@ public class GrowingPickup : MonoBehaviour
         }
     }
 
-	public void SetSprite(Sprite sprite)
-	{
-		if (m_SpriteRenderer != null)
-			m_SpriteRenderer.sprite = sprite; 
-	}
-
     public void SetSprite()
     {
         if (m_PickupData != null)
             SetSprite(m_PickupData.Sprite);
+    }
+
+    public void SetSprite(bool randomRotate)
+    {
+        if (m_PickupData != null)
+            SetSprite(m_PickupData.Sprite, randomRotate);
+    }
+
+    public void SetSprite(Sprite sprite, bool randomRotate = false)
+    {
+        if (m_SpriteRenderer != null)
+            m_SpriteRenderer.sprite = sprite;
+
+        if (randomRotate)
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, UnityEngine.Random.Range(0.0f, 360f));
+        }
     }
 }
