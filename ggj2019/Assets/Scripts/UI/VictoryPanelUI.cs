@@ -6,6 +6,9 @@ public class VictoryPanelUI : MonoBehaviour
 	[SerializeField]
 	private CanvasGroup m_CanvasGroup;
 
+    [SerializeField]
+    private AudioSource m_VictoryJingle;
+
 	private void Start()
 	{
 		LevelDirector levelDirector = LevelDirector.Instance;
@@ -37,6 +40,9 @@ public class VictoryPanelUI : MonoBehaviour
 	private void OnLevelSucces()
 	{
         if (m_CanvasGroup != null)
-		    m_CanvasGroup.Show(true); 
-	}
+		    m_CanvasGroup.Show(true);
+
+        if (m_VictoryJingle != null)
+            m_VictoryJingle.Play();
+    }
 }
