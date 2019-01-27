@@ -49,19 +49,27 @@ public class GrowingPickup : MonoBehaviour
         if (m_PickupData == null)
             return;
 
-        IGrowable growable = collision.collider.GetComponent<IGrowable>();
-
-        if (growable != null)
+        if (m_PickupData.GrowAmount > 0.0f)
         {
-            //Check if we should get picked up!
-            if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
-            {
-				if (PickupEvent != null)
-					PickupEvent(this); 
+            IGrowable growable = collision.collider.GetComponent<IGrowable>();
 
-                growable.Grow(m_PickupData.GrowAmount);
-                gameObject.SetActive(false);
+            if (growable != null)
+            {
+                //Check if we should get picked up!
+                if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
+                {
+                    if (PickupEvent != null)
+                        PickupEvent(this);
+
+                    growable.Grow(m_PickupData.GrowAmount);
+                    gameObject.SetActive(false);
+                }
             }
+        }
+
+        if (m_PickupData.DealsDamage)
+        {
+            //TODO
         }
     }
 

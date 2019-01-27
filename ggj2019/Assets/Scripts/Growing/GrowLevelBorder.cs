@@ -30,7 +30,7 @@ public class GrowLevelBorder : MonoBehaviour
 
     [SerializeField]
     private List<BreakSetting> m_BreakSettings;
-    private int m_CurrentBreakSetting = 0;
+    private int m_CurrentBreakSetting = 1;
 
     [Header("Required References")]
     [Space(5)]
@@ -64,7 +64,7 @@ public class GrowLevelBorder : MonoBehaviour
         if (m_BreakSettings.Count > 0)
             m_Visuals.color = m_BreakSettings[0].VisualColor;
 
-        m_CurrentBreakSetting = 0;
+        m_CurrentBreakSetting = 1;
     }
 
     private void OnPlayerMove(PlayerController player, Vector3 newPosition, Quaternion newRotation)
