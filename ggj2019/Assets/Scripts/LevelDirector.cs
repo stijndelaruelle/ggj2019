@@ -20,8 +20,13 @@ public class LevelDirector : Singleton<LevelDirector>
         get { return m_IsLevelStarted; }
     }
 
-    //This is the last start function that get's fired in a scene
-    private void Update()
+	//This is the last start function that get's fired in a scene
+	private void Start()
+	{
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+	}
+
+	private void Update()
     {
         if (m_IsLevelStarted == false)
             return;
