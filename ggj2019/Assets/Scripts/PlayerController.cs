@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour, IGrowable, IDamageable
     {
         //Hide
         SetSize(0);
+        LevelDirector.Instance.CompleteLevel(false);
     }
 
 	public void SetPosition(Vector3 position)

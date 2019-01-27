@@ -13,7 +13,8 @@ public class VictoryPanelUI : MonoBehaviour
 		if (levelDirector == null)
 			return;
 
-		levelDirector.LevelSucces += OnLevelSucces; 
+        levelDirector.LevelStartEvent += OnLevelStart;
+        levelDirector.LevelSucces += OnLevelSucces;
 	}
 
 	private void OnDestroy()
@@ -23,11 +24,19 @@ public class VictoryPanelUI : MonoBehaviour
 		if (levelDirector == null)
 			return;
 
-		levelDirector.LevelSucces -= OnLevelSucces; 
+        levelDirector.LevelStartEvent -= OnLevelStart;
+        levelDirector.LevelSucces -= OnLevelSucces; 
 	}
+
+    private void OnLevelStart()
+    {
+        if (m_CanvasGroup != null)
+            m_CanvasGroup.Show(false);
+    }
 
 	private void OnLevelSucces()
 	{
-		m_CanvasGroup.Show(true); 
+        if (m_CanvasGroup != null)
+		    m_CanvasGroup.Show(true); 
 	}
 }
