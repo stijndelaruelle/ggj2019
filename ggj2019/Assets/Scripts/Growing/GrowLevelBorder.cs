@@ -16,10 +16,10 @@ public class GrowLevelBorder : MonoBehaviour
         }
 
         [SerializeField]
-        private Color m_VisualColor; //Will change into a sprite
-        public Color VisualColor
+        private Sprite m_Visual; //Will change into a sprite
+        public Sprite Visual
         {
-            get { return m_VisualColor; }
+            get { return m_Visual; }
         }
     }
 
@@ -62,7 +62,7 @@ public class GrowLevelBorder : MonoBehaviour
     private void OnLevelStart()
     {
         if (m_BreakSettings.Count > 0)
-            m_Visuals.color = m_BreakSettings[0].VisualColor;
+            m_Visuals.sprite = m_BreakSettings[0].Visual;
 
         m_CurrentBreakSetting = 1;
     }
@@ -86,8 +86,8 @@ public class GrowLevelBorder : MonoBehaviour
                 {
                     if (player.GetPower() >= m_BreakSettings[m_CurrentBreakSetting].RequiredPower)
                     {
+                        m_Visuals.sprite = m_BreakSettings[m_CurrentBreakSetting].Visual;
                         m_CurrentBreakSetting += 1;
-                        m_Visuals.color = m_BreakSettings[m_CurrentBreakSetting].VisualColor;
                     }
                 }
 

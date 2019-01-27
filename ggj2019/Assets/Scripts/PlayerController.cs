@@ -281,12 +281,12 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
     //Accessors
     public float GetPower()
 	{
-        return m_CurrentMoveSpeed;// * //m_CurrentSize); // * 
+        return m_CurrentMoveSpeed * m_CurrentSize;
     }
 
 	//Debug
 	private void OnGUI()
 	{
-		GUI.Label(new Rect(10, 10, 100, 20), "Angle: " + m_DebugGyroAngle);
+		GUI.Label(new Rect(10, 10, 100, 20), "Power: " + GetPower());
 	}
 }
