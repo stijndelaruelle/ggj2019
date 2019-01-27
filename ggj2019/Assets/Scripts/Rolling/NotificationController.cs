@@ -7,7 +7,6 @@ public class NotificationController : MonoBehaviour
 
 	public void Notify(string message)
 	{
-		Debug.Log("Notified");
 		m_NotificationText.Value = message;
 	}
 }

@@ -220,6 +220,9 @@ public class PlayerController : MonoBehaviour, IGrowable, IDamageable
 
 	private void SetSize(float size)
 	{
+		if (size < 0)
+			return; 
+
 		m_CurrentSize = size;
 
 		//Gameplay adjusts immediatly
