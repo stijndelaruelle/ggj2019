@@ -56,7 +56,6 @@ public class EmotionPanel : MonoBehaviour
 
 	private void OnShrinkingSurfaceEnter()
 	{
-		Debug.Log("Shrinking surface entered"); 
 		Emote(2);
 	}
 
