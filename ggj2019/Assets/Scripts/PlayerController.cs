@@ -3,7 +3,7 @@ using Sjabloon;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IGrowable
+public class PlayerController : MonoBehaviour, IGrowable, IDamageable
 {
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition, Quaternion newRotation);
 
@@ -206,6 +206,12 @@ public class PlayerController : MonoBehaviour, IGrowable
             GrowEvent(m_CurrentSize);
 	}
 
+    public void Damage()
+    {
+        //Hide
+        SetSize(0);
+    }
+
 	public void SetPosition(Vector3 position)
 	{
 		transform.position = position;
@@ -231,7 +237,7 @@ public class PlayerController : MonoBehaviour, IGrowable
 	//Accessors
 	public float GetPower()
 	{
-		return (m_CurrentSize); //m_CurrentMoveSpeed * 
+        return m_CurrentMoveSpeed;// * //m_CurrentSize); // * 
     }
 
 	//Debug
