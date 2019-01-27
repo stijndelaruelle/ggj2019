@@ -16,7 +16,7 @@ public class GrowingPickup : MonoBehaviour
 
 	private Collider2D m_Collider;
 
-	public event PickupDelegate PickupEvent; 
+	public static event PickupDelegate PickupEvent; 
 
 	public PickupData PickupData
 	{
