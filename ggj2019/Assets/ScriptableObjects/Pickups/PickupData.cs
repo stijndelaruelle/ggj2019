@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Disco Dungball/Pickup Data")]
 public class PickupData : ScriptableObject
 {
     [Header("Settings")]
@@ -20,34 +19,13 @@ public class PickupData : ScriptableObject
     {
         get { return m_MoveSpeedAmount; }
     }
-
-    [SerializeField]
-    private float m_PickupSize;
-    public float PickupSize
-    {
-        get { return m_PickupSize; }
-    }
-
-    [SerializeField]
-    private bool m_DealsDamage;
-    public bool DealsDamage
-    {
-        get { return m_DealsDamage; }
-    }
-
+    
     [Header("Visuals")]
     [Space(5)]
     [SerializeField]
-    private Sprite m_OutdoorSprite;
-    public Sprite OutdoorSprite
+    private Sprite m_Sprite;
+    public Sprite Sprite
     {
-        get { return m_OutdoorSprite; }
-    }
-
-    [SerializeField]
-    private Sprite m_IndoorSprite;
-    public Sprite IndoorSprite
-    {
-        get { return m_IndoorSprite; }
+        get { return m_Sprite; }
     }
 }

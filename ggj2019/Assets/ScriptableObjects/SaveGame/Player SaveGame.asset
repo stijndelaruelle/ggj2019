@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f560ec5efbbdb48b55405cf738500c, type: 3}
-  m_Name: Food
+  m_Script: {fileID: 11500000, guid: 9fee7bd7ea4a5924795950de57dc67b3, type: 3}
+  m_Name: Player SaveGame
   m_EditorClassIdentifier: 
-  m_GrowAmount: 0.2
-  m_MoveSpeedAmount: 0
-  m_PickupSize: 0
-  m_DealsDamage: 0
-  m_OutdoorSprite: {fileID: 0}
-  m_IndoorSprite: {fileID: 21300000, guid: e338dc74878e9754e935658a45995c8d, type: 3}
+  m_MoveSpeed: 5

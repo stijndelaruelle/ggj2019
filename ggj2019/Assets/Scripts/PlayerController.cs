@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 {
 	public delegate void MoveDelegate(PlayerController player, Vector3 newPosition, Quaternion newRotation);
 
-	[SerializeField]
-	private float m_StartMoveSpeed;
-	[SerializeField]
+    [SerializeField]
+    private float m_StartMoveSpeed = 5.0f;
+
+    [SerializeField]
 	private float m_MinSize; 
 	private Vector3 m_StartPosition;
 	private float m_StartSize;
@@ -34,8 +35,18 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		get { return m_Collider.radius; }
 	}
 
-	//Movement
-	private Vector3 m_StartGyroAttitudeToEuler;
+    [Header("Save Data")]
+    [SerializeField]
+    private PlayerSaveData m_SaveData;
+
+    [SerializeField]
+    private bool m_SaveToSaveGame;
+
+    [SerializeField]
+    private bool m_LoadFromSaveGame;
+
+    //Movement
+    private Vector3 m_StartGyroAttitudeToEuler;
 	private float m_DebugGyroAngle;
 
 	private float m_CurrentMoveSpeed;
@@ -62,6 +73,7 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		//Level reset
 		m_StartPosition = transform.position.Copy();
 		m_StartSize = 1.0f;
+        m_CurrentSize = m_StartSize;
 
         if (m_VisualTransform != null)
             m_StartVisualSize = m_VisualTransform.localScale.x;
@@ -69,16 +81,17 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		if (m_Collider != null)
 			m_StartRadius = m_Collider.radius;
 
+        if (m_SaveData != null && m_LoadFromSaveGame)
+            m_StartMoveSpeed = m_SaveData.MoveSpeed;
+
         m_CurrentMoveSpeed = m_StartMoveSpeed;
-        m_CurrentSize = m_StartSize;
-
+   
         LevelDirector.Instance.LevelStartEvent += OnLevelStart;
-		//LevelDirector.Instance.LevelStopEvent += OnLevelStop;
 		LevelDirector.Instance.LevelUpdateEvent += OnLevelUpdate;
-		//LevelDirector.Instance.LevelFixedUpdateEvent += OnLevelFixedUpdate;
+        LevelDirector.Instance.LevelSucces += OnLevelSuccess;
 
-		//Register input
-		Input.gyro.enabled = true;
+        //Register input
+        Input.gyro.enabled = true;
 
 		InputManager inputManager = InputManager.Instance;
 
@@ -101,10 +114,10 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		if (levelDirector != null)
 		{
 			levelDirector.LevelStartEvent -= OnLevelStart;
-			//levelDirector.LevelStopEvent -= OnLevelStop;
 			levelDirector.LevelUpdateEvent -= OnLevelUpdate;
-			//levelDirector.LevelFixedUpdateEvent -= OnLevelFixedUpdate;
-		}
+            levelDirector.LevelSucces -= OnLevelSuccess;
+            //levelDirector.LevelFixedUpdateEvent -= OnLevelFixedUpdate;
+        }
 	}
 
 
@@ -115,6 +128,7 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		m_DebugGyroAngle = 0.0f;
 
         transform.position = m_StartPosition;
+
         m_CurrentMoveSpeed = m_StartMoveSpeed;
         SetSize(m_StartSize);
 	}
@@ -128,7 +142,15 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
 		}
 	}
 
-	private void FixedUpdate()
+    private void OnLevelSuccess()
+    {
+        if (m_SaveToSaveGame)
+        {
+            m_SaveData.MoveSpeed = m_CurrentMoveSpeed;
+        }
+    }
+
+    private void FixedUpdate()
 	{
 		//Should have been "OnLevelFixedUpdate" but this never get's sent as the LevelDirector doesn't have a rigidbody
 		if (LevelDirector.Instance.IsLevelStarted == false)

@@ -57,7 +57,15 @@ public class GrowingPickup : MonoBehaviour
             if (growable != null)
             {
                 //Check if we should get picked up!
-                if (growable.Size >= m_PickupData.PickupSize && m_Collider != null)
+                bool canPickup = true;
+
+                if (m_PickupData is OutdoorPickupData)
+                {
+                    if (growable.Size < ((OutdoorPickupData)m_PickupData).PickupSize || m_Collider == null)
+                        canPickup = false;
+                }
+
+                if (canPickup)
                 {
                     if (PickupEvent != null)
                         PickupEvent(this);
@@ -81,30 +89,38 @@ public class GrowingPickup : MonoBehaviour
         }
 
         //Damage
-        if (m_PickupData.DealsDamage)
+        if (m_PickupData is IndoorPickupData)
         {
-            IDamageable damageable = collision.collider.GetComponent<IDamageable>();
+            if (((IndoorPickupData)m_PickupData).DealsDamage)
+            {
+                IDamageable damageable = collision.collider.GetComponent<IDamageable>();
 
-            if (damageable != null)
-                damageable.Damage();
+                if (damageable != null)
+                    damageable.Damage();
+            }
         }
     }
 
-	public void SetSprite(Sprite sprite)
-	{
-		if (m_SpriteRenderer != null)
-			m_SpriteRenderer.sprite = sprite; 
-	}
-
-    public void SetOutdoorSprite()
+    public void SetSprite()
     {
         if (m_PickupData != null)
-            SetSprite(m_PickupData.OutdoorSprite);
+            SetSprite(m_PickupData.Sprite);
     }
 
-    public void SetIndoorSprite()
+    public void SetSprite(bool randomRotate)
     {
         if (m_PickupData != null)
-            SetSprite(m_PickupData.IndoorSprite);
+            SetSprite(m_PickupData.Sprite, randomRotate);
+    }
+
+    public void SetSprite(Sprite sprite, bool randomRotate = false)
+    {
+        if (m_SpriteRenderer != null)
+            m_SpriteRenderer.sprite = sprite;
+
+        if (randomRotate)
+        {
+            transform.rotation = Quaternion.Euler(0.0f, 0.0f, UnityEngine.Random.Range(0.0f, 360f));
+        }
     }
 }
