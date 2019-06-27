@@ -152,8 +152,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Houd je telefoon plat voor je en draai om je karakter te besturen. \nEet
-    zoveel mogelijk hapjes om te groeien en uit te breken. \n\nSucces!"
+  m_Text: 'Houd je telefoon plat voor je en draai om je karakter te besturen.
+
+
+    Eet zoveel mogelijk hapjes om te groeien en uit de mestbal te breken. Maar let
+    op dat je de scherpe stenen niet raakt!
+
+
+    Succes!'
 --- !u!1 &7200179190243885521
 GameObject:
   m_ObjectHideFlags: 0

@@ -286,8 +286,8 @@ public class PlayerController : MonoBehaviour, IGrowable, IMoveable, IDamageable
     }
 
 	//Debug
-	private void OnGUI()
-	{
-		GUI.Label(new Rect(10, 10, 100, 20), "Power: " + GetPower());
-	}
+	//private void OnGUI()
+	//{
+	//	GUI.Label(new Rect(10, 10, 100, 20), "Power: " + GetPower());
+	//}
 }

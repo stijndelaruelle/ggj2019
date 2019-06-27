@@ -345,11 +345,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1811768698}
     m_Modifications:
-    - target: {fileID: 3905451432984195228, guid: 315ca3e614b6398458bc512b43d2185d,
-        type: 3}
-      propertyPath: m_Name
-      value: envir
-      objectReference: {fileID: 0}
     - target: {fileID: 3905451432984195231, guid: 315ca3e614b6398458bc512b43d2185d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -404,6 +399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905451432984195228, guid: 315ca3e614b6398458bc512b43d2185d,
+        type: 3}
+      propertyPath: m_Name
+      value: envir
       objectReference: {fileID: 0}
     - target: {fileID: 3905451432931672239, guid: 315ca3e614b6398458bc512b43d2185d,
         type: 3}
@@ -2260,7 +2260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c8c42e4ccc788498317c0d2a62d433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartMoveSpeed: 10
+  m_StartMoveSpeed: 20
   m_MinSize: 0.3
   m_DebugRotateSpeed: 2
   m_IsImmune: 0
@@ -3003,7 +3003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434605988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.300001, y: -40.5, z: -10}
+  m_LocalPosition: {x: 22.300001, y: -40.5, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2025660641}
@@ -3083,8 +3083,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 19254b65c63a1894187d520bc076786b, type: 2}
+  m_sharedMaterial: {fileID: 21897450367558212, guid: 19254b65c63a1894187d520bc076786b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3109,8 +3110,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6480,7 +6481,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -11165,7 +11166,7 @@ PrefabInstance:
     - target: {fileID: 883619463629896865, guid: 54eb149d8239b28498b7763fbfa541ee,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -192
       objectReference: {fileID: 0}
     - target: {fileID: 883619463629896865, guid: 54eb149d8239b28498b7763fbfa541ee,
         type: 3}

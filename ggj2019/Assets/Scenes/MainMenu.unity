@@ -599,8 +599,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_Font: {fileID: 12800000, guid: b150221f5ac1ba54da70514a61cf41b0, type: 3}
+    m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -611,7 +611,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Antonio, Aurelia, Daphne & Stijn
+  m_Text: Antonio, Aurelia, Daphne, Toon & Stijn
 --- !u!222 &381838169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -821,11 +821,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
-        type: 3}
-      propertyPath: m_Name
-      value: tree1
-      objectReference: {fileID: 0}
     - target: {fileID: 2498294571534299626, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -880,6 +875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
+        type: 3}
+      propertyPath: m_Name
+      value: tree1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174fae90a33bcde4eb969a0e9d4c3e01, type: 3}
@@ -1411,11 +1411,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
-        type: 3}
-      propertyPath: m_Name
-      value: tree3
-      objectReference: {fileID: 0}
     - target: {fileID: 1464266390698229666, guid: 61a443a0d9287564693ce0a0cfdcddb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1470,6 +1465,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
+        type: 3}
+      propertyPath: m_Name
+      value: tree3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61a443a0d9287564693ce0a0cfdcddb4, type: 3}
@@ -1921,11 +1921,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
-        type: 3}
-      propertyPath: m_Name
-      value: tree3
-      objectReference: {fileID: 0}
     - target: {fileID: 1464266390698229666, guid: 61a443a0d9287564693ce0a0cfdcddb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1980,6 +1975,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
+        type: 3}
+      propertyPath: m_Name
+      value: tree3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61a443a0d9287564693ce0a0cfdcddb4, type: 3}
@@ -2179,11 +2179,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
-        type: 3}
-      propertyPath: m_Name
-      value: tree1 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2498294571534299626, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2238,6 +2233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
+        type: 3}
+      propertyPath: m_Name
+      value: tree1 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174fae90a33bcde4eb969a0e9d4c3e01, type: 3}
@@ -2631,11 +2631,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
-        type: 3}
-      propertyPath: m_Name
-      value: tree3 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1464266390698229666, guid: 61a443a0d9287564693ce0a0cfdcddb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2690,6 +2685,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002779166844579439, guid: 61a443a0d9287564693ce0a0cfdcddb4,
+        type: 3}
+      propertyPath: m_Name
+      value: tree3 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61a443a0d9287564693ce0a0cfdcddb4, type: 3}
@@ -3008,11 +3008,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368633590}
     m_Modifications:
-    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
-        type: 3}
-      propertyPath: m_Name
-      value: tree1
-      objectReference: {fileID: 0}
     - target: {fileID: 2498294571534299626, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3067,6 +3062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252587395350882529, guid: 174fae90a33bcde4eb969a0e9d4c3e01,
+        type: 3}
+      propertyPath: m_Name
+      value: tree1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174fae90a33bcde4eb969a0e9d4c3e01, type: 3}
